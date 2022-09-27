@@ -144,7 +144,7 @@ rule CockyGet:
    [ Out_O($A,$B, x) ]
 #endif
 
-#ifdef FORGER
+#ifdef RECEIPTFORGER
 //Forger
 rule Print [color=#FF0000]:
 let y=receipt(x)
@@ -152,7 +152,9 @@ in
 [In(x)]
 --[PrintA(x),Human($Att)]->
 [PosDA($Att,y)]
+#endif
 
+#ifdef OBJECTFORGER
 rule Build [color=#FF0000]:
 let y=object(x)
 in
