@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import com.google.common.collect.Sets;
 
 public class Main {
 
@@ -8,12 +9,9 @@ public class Main {
 
         TamarinFileReader tfr = new TamarinFileReader();
         ArrayList<String> keywords = tfr
-                .readFile("/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy");
-        for (String word : keywords)
-            System.out.println(word);
-
+                .readFile("C:\\Users\\jbroc\\OneDrive\\Uni\\SD\\3. semester\\Research project\\TamarinAutoRunner\\exampleFiles\\Netto.spthy");
         nHumanThreats = keywords.size();
-
+        new CombinationTree(keywords);
         int iterator = nHumanThreats;
 
     }
