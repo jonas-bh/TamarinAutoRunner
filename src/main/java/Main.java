@@ -13,13 +13,16 @@ public class Main {
                         "C:\\Users\\jbroc\\OneDrive\\Uni\\SD\\3. semester\\Research project\\TamarinAutoRunner\\exampleFiles\\Netto.spthy");
         nHumanThreats = keywords.size();
 
-        for (int i = 0; i < 15; i++) {
-            keywords.add("Odd" + i) ;
+        // for (int i = 0; i < 15; i++) {
+        //     keywords.add("Odd" + i) ;
 
-        }
+        // }
 
-        new CombinationGraph(keywords);
+        CombinationGraph graph = new  CombinationGraph(keywords);
         int iterator = nHumanThreats;
+
+        GraphTraverser traverser = new GraphTraverser(graph);
+        traverser.execute();
 
     }
 }

@@ -4,49 +4,34 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Node implements Comparable {
-    String name;
-    Set<String> threats = new HashSet<>();
-    int size = 0; // Number of individual threats in this node.
-    int level;
-
-    HashSet<Node> parents = new HashSet<>();
-    HashSet<Node> children = new HashSet<>();
+    private Set<String> threats = new HashSet<>();
+    private int size = 0; // Number of individual threats in this node.
+    private int level;
+    private HashSet<Node> parents = new HashSet<>();
+    private HashSet<Node> children = new HashSet<>();
+    private boolean wasValidated = false;
+    private boolean validationResult = false;
 
     public Node(Set<String> threatCombination, int totalNumberOfThreats) {
-        if (threatCombination.isEmpty()) {
-            name = "HONEST";
-        } else {
-            name = generateNormalizedName(threatCombination);
-        }
+        size = threatCombination.size();
         level = totalNumberOfThreats - size;
+        for (String threat : threatCombination) {
+            threats.add(threat);
+        }
     }
 
     public int getLevel() {
         return level;
     }
 
-    public boolean isChildOf(Node node){
+    public boolean isChildOf(Node node) {
         var parentThreats = node.threats;
         for (String threat : threats) {
-            if (!parentThreats.contains(threat)){
+            if (!parentThreats.contains(threat)) {
                 return false;
             }
         }
         return true;
-    }
-
-    public String generateNormalizedName(Set<String> threatCombination) {
-        var threatCount = 0;
-        var output = "";
-        var list = new ArrayList<>(threatCombination);
-        Collections.sort(list);
-        for (var item : threatCombination) {
-            threats.add(item);
-            output = output + "-" + item;
-            threatCount++;
-        }
-        size = threatCount;
-        return output.substring(1);
     }
 
     @Override
@@ -71,5 +56,33 @@ public class Node implements Comparable {
 
     public void addChild(Node child) {
         children.add(child);
+    }
+
+    public void setWasValidated() {
+        wasValidated = true;
+    }
+
+    public boolean getWasValidated() {
+        return wasValidated;
+    }
+
+    public void setValidationResult(boolean result) {
+        validationResult = result;
+    }
+
+    public boolean getValidationResult() {
+        return validationResult;
+    }
+
+    public HashSet<Node> getParents() {
+        return parents;
+    }
+
+    public HashSet<Node> getChildren() {
+        return children;
+    }
+
+    public int getSize(){
+        return size;
     }
 }

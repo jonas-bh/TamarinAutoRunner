@@ -1,11 +1,13 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import com.google.common.collect.Sets;
 
 public class CombinationGraph {
-    ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
-    int totalNumberOfThreats;
+    private ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
+    private int totalNumberOfThreats;
+    private int noOfLevels = 0;
+    private int noOfValidatedNodes = 0;
+    private int size = 0;
 
     public CombinationGraph(ArrayList<String> threats) {
         HashSet<String> set = new HashSet<>();
@@ -24,6 +26,7 @@ public class CombinationGraph {
             ArrayList<Node> list;
             list = nodes.get(level);
             list.add(node);
+            size++;
         }
 
         // Print all nodes
@@ -31,6 +34,7 @@ public class CombinationGraph {
             System.out.println(node);
         }
         addEdges();
+        noOfLevels = nodes.size();
     }
 
     public void addEdges() {
@@ -48,7 +52,25 @@ public class CombinationGraph {
                 }
             }
         }
-        System.out.println("fsad");
     }
 
+    public int noOfLevels(){
+        return noOfLevels;
+    }
+
+    public Node getNode(int level, int index){
+        return nodes.get(level).get(index);
+    }
+
+    public void incrementNoOfValidatedNodes () {
+        noOfValidatedNodes++;
+    }
+
+    public boolean fullyValidated () {
+        return noOfValidatedNodes == size;  
+    }
+
+    public int getTotalNumberOfThreats(){
+        return totalNumberOfThreats;
+    }
 }
