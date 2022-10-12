@@ -5,9 +5,7 @@ import com.google.common.collect.Sets;
 public class CombinationGraph {
     private ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
     private int totalNumberOfThreats;
-    private int noOfLevels = 0;
-    private int noOfValidatedNodes = 0;
-    private int size = 0;
+    private int noNodes = 0;
 
     public CombinationGraph(ArrayList<String> threats) {
         HashSet<String> set = new HashSet<>();
@@ -26,15 +24,21 @@ public class CombinationGraph {
             ArrayList<Node> list;
             list = nodes.get(level);
             list.add(node);
-            size++;
+            noNodes++;
         }
 
         // Print all nodes
-        for (var node : nodes) {
-            System.out.println(node);
-        }
+        System.out.println(this);
         addEdges();
-        noOfLevels = nodes.size();
+    }
+
+    @Override
+    public String toString(){
+        var res = "";
+        for (var node : nodes) {
+            res += node.toString();
+        }
+        return res;
     }
 
     public void addEdges() {
@@ -54,23 +58,76 @@ public class CombinationGraph {
         }
     }
 
+    private void removeNode(Node node) {
+        System.out.println("Removing node: " + node + " positioned at level " + node.getLevel());
+        for (var parent : node.getParents()) {
+            parent.removeChild(node);
+        }
+        for (var child : node.getChildren()) {
+            child.removeParent(node);
+        }
+        nodes.get(node.getLevel()).remove(node);
+        // if (nodes.get(node.getLevel()).size() == 0){
+        //     nodes.remove(node.getLevel());
+        // }
+        noNodes--;
+    }
+
+    public void markFalsified(Node node){
+        System.out.println(node);
+        ArrayList<Node> parents = new ArrayList<>(node.getParents()); // create copy of parents list to avoid ConcurrentModificationException
+        for (var parent : parents) {
+            markFalsified(parent);
+        }
+        removeNode(node);
+
+        //TODO write log information
+    }
+    
+    public void markVerified(Node node){
+        System.out.println(node);
+        ArrayList<Node> children = new ArrayList<>(node.getChildren()); // create copy of parents list to avoid ConcurrentModificationException
+        for (var child : children) {
+            markVerified(child);
+        }
+        removeNode(node);
+
+        //TODO write log information
+    }
+
     public int noOfLevels(){
-        return noOfLevels;
+        return nodes.size();
     }
 
     public Node getNode(int level, int index){
         return nodes.get(level).get(index);
     }
 
-    public void incrementNoOfValidatedNodes () {
-        noOfValidatedNodes++;
-    }
-
-    public boolean fullyValidated () {
-        return noOfValidatedNodes == size;  
-    }
-
     public int getTotalNumberOfThreats(){
         return totalNumberOfThreats;
+    }
+
+    public Node getNextNode(){
+        Node selectedNode = null;
+        for (var level : nodes) {
+            for (Node node : level) {
+                if (selectedNode == null){
+                    selectedNode = node;
+                    continue;
+                }
+                
+                if (node.getDegree() > selectedNode.getDegree()){
+                    selectedNode = node;
+                }
+                if (node.getDegree() == selectedNode.getDegree() && node.DifferenceInOutDegree() < selectedNode.DifferenceInOutDegree()){
+                    selectedNode = node;
+                }
+            }
+        }
+        return selectedNode;
+    }
+
+    public int GetNumberOfNodes(){
+        return noNodes;
     }
 }

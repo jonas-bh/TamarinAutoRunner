@@ -1,20 +1,16 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Node implements Comparable {
-    private Set<String> threats = new HashSet<>();
-    private int size = 0; // Number of individual threats in this node.
+    private Set<String> threats = new HashSet<>(); // Threats (represented as strings) present in this node.
+    private int noThreats = 0; // Number of individual threats in this node.
     private int level;
     private HashSet<Node> parents = new HashSet<>();
     private HashSet<Node> children = new HashSet<>();
-    private boolean wasValidated = false;
-    private boolean validationResult = false;
 
     public Node(Set<String> threatCombination, int totalNumberOfThreats) {
-        size = threatCombination.size();
-        level = totalNumberOfThreats - size;
+        noThreats = threatCombination.size();
+        level = totalNumberOfThreats - noThreats;
         for (String threat : threatCombination) {
             threats.add(threat);
         }
@@ -36,15 +32,15 @@ public class Node implements Comparable {
 
     @Override
     public String toString() {
-        return ("Node(" + threats + ", " + size + ")");
+        return ("Node(" + threats + ", " + noThreats + " " + getDegree() + " " + DifferenceInOutDegree() + ")");
     }
 
     @Override
     public int compareTo(Object o) {
         Node node = (Node) o;
-        if (size < node.size) {
+        if (noThreats < node.noThreats) {
             return -1;
-        } else if (size == node.size) {
+        } else if (noThreats == node.noThreats) {
             return 0;
         }
         return 1;
@@ -58,20 +54,12 @@ public class Node implements Comparable {
         children.add(child);
     }
 
-    public void setWasValidated() {
-        wasValidated = true;
+    public void removeChild(Node child) {
+        children.remove(child);
     }
 
-    public boolean getWasValidated() {
-        return wasValidated;
-    }
-
-    public void setValidationResult(boolean result) {
-        validationResult = result;
-    }
-
-    public boolean getValidationResult() {
-        return validationResult;
+    public void removeParent(Node parent) {
+        parents.remove(parent);
     }
 
     public HashSet<Node> getParents() {
@@ -82,7 +70,15 @@ public class Node implements Comparable {
         return children;
     }
 
-    public int getSize(){
-        return size;
+    public int getNumberOfThreats(){
+        return noThreats;
+    }
+
+    public int getDegree(){
+        return parents.size() + children.size();
+    }
+    
+    public int DifferenceInOutDegree(){
+        return Math.abs(parents.size() - children.size());
     }
 }
