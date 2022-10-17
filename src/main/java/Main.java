@@ -10,7 +10,7 @@ public class Main {
         TamarinFileReader tfr = new TamarinFileReader();
         ArrayList<String> keywords = tfr
                 .readFile(
-                        "C:\\Users\\jbroc\\OneDrive\\Uni\\SD\\3. semester\\Research project\\TamarinAutoRunner\\exampleFiles\\Netto.spthy");
+                        "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy");
         nHumanThreats = keywords.size();
 
         // for (int i = 0; i < 15; i++) {

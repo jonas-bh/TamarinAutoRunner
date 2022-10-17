@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TamarinFileReader {
-
     public ArrayList<String> readFile(String path) {
-
         ArrayList<String> keywords = new ArrayList<String>();
-
         BufferedReader br = null;
+        
         try {
             br = new BufferedReader(new FileReader(path));
         } catch (FileNotFoundException e) {

@@ -28,7 +28,7 @@ public class CombinationGraph {
         }
 
         // Print all nodes
-        System.out.println(this);
+        // System.out.println(this);
         addEdges();
     }
 
@@ -59,7 +59,7 @@ public class CombinationGraph {
     }
 
     private void removeNode(Node node) {
-        System.out.println("Removing node: " + node + " positioned at level " + node.getLevel());
+        // System.out.println("Removing node: " + node + " positioned at level " + node.getLevel());
         for (var parent : node.getParents()) {
             parent.removeChild(node);
         }
@@ -74,7 +74,7 @@ public class CombinationGraph {
     }
 
     public void markFalsified(Node node){
-        System.out.println(node);
+        // System.out.println(node);
         ArrayList<Node> parents = new ArrayList<>(node.getParents()); // create copy of parents list to avoid ConcurrentModificationException
         for (var parent : parents) {
             markFalsified(parent);
@@ -85,7 +85,7 @@ public class CombinationGraph {
     }
     
     public void markVerified(Node node){
-        System.out.println(node);
+        // System.out.println(node);
         ArrayList<Node> children = new ArrayList<>(node.getChildren()); // create copy of parents list to avoid ConcurrentModificationException
         for (var child : children) {
             markVerified(child);

@@ -16,6 +16,10 @@ public class Node implements Comparable {
         }
     }
 
+    public Set<String> getThreats () {
+        return threats;
+    }
+
     public int getLevel() {
         return level;
     }
