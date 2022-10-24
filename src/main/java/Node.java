@@ -36,7 +36,7 @@ public class Node implements Comparable {
 
     @Override
     public String toString() {
-        return ("Node(" + threats + ", " + noThreats + " " + getDegree() + " " + DifferenceInOutDegree() + ")");
+        return ("Node(" +   threats + ", noThreats: " + noThreats + ", degree: " + getDegree() + ", DifferenceInOutDegree: " + DifferenceInOutDegree() + ")");
     }
 
     @Override

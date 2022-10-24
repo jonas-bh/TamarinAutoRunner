@@ -38,6 +38,7 @@ public class GraphTraverser {
 
     public boolean runTamarinOnNode(Node node) {
 
+        System.out.println();
         System.out.println("Running Tamarin on " + node.toString() + "...");
 
         Process process = null;
@@ -52,8 +53,6 @@ public class GraphTraverser {
             String dKeywords = getDKeyword(node);
             var command = tamarinPath + " " + spthyFile + " --heuristic=o --oraclename=" + oracleFile
                     + " --stop-on-trace=SEQDFS --prove " + dKeywords;
-
-            System.out.println(command);
 
             process = Runtime.getRuntime().exec(command);
 
@@ -80,13 +79,12 @@ public class GraphTraverser {
                     includeLine = true;
                 }
 
-                System.out.println(line);
+                // System.out.println(line);
             }
 
-            int exitVal = process.waitFor();
-            System.out.println("Exit value: " + exitVal);
+            System.out.println("Finished running Tamarin on Node: " + node.toString());
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Tamarin finished.");
