@@ -115,6 +115,7 @@ public class GraphTraverser {
             FileWriter fw = new FileWriter("results.txt");
 
             for (Node node : results.keySet()) {
+                fw.write(node.toString());
                 for (String s : results.get(node)) {
                     fw.write(s);
                     fw.write("\n");
