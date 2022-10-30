@@ -1,3 +1,5 @@
+package TamarinAutoRunner;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import com.google.common.collect.Sets;

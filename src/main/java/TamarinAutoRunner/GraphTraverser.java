@@ -1,4 +1,7 @@
+package TamarinAutoRunner;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +13,15 @@ public class GraphTraverser {
     private CombinationGraph graph;
     HashMap<Node, ArrayList<String>> results = new HashMap<>();
 
-    public GraphTraverser(CombinationGraph graph) {
+    String protocol;
+    String oracleFile;
+    String tamarinBin;
+
+    public GraphTraverser(CombinationGraph graph, String protocol, String oracleFile, String tamarinBin) {
         this.graph = graph;
+        this.protocol=protocol;
+        this.oracleFile=oracleFile;
+        this.tamarinBin=tamarinBin;
     }
 
     private boolean validateNode(Node node) {
@@ -46,15 +56,15 @@ public class GraphTraverser {
         try {
 
             // Necessary when running tamarin from a binary file
-            var tamarinPath = "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
-            // var tamarinPath = "tamarin-prover";
-            var spthyFile = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
-            var oracleFile = "./exampleFiles/oracle.py"; // Relative from the current working directory
-            String dKeywords = getDKeyword(node);
-            var command = tamarinPath + " " + spthyFile + " --heuristic=o --oraclename=" + oracleFile
-                    + " --stop-on-trace=SEQDFS --prove " + dKeywords;
-
-            process = Runtime.getRuntime().exec(command);
+            // var tamarinPath = "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
+            // // var tamarinPath = "tamarin-prover";
+            // var spthyFile = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
+            // var oracleFile = "./exampleFiles/oracle.py"; // Relative from the current working directory
+            String command = buildCommand(node);
+            System.out.println("Trying to run command: " + command);
+            File currentDir = new File(System.getProperty("user.dir"));
+            System.out.println(currentDir);
+            process = Runtime.getRuntime().exec(command, null, currentDir);
 
             process.getErrorStream().close(); // Close ErrorStream because it causes the subprocess to hang during
                                               // emptying.
@@ -79,7 +89,7 @@ public class GraphTraverser {
                     includeLine = true;
                 }
 
-                // System.out.println(line);
+                System.out.println(line);
             }
 
             System.out.println("Finished running Tamarin on Node: " + node.toString());
@@ -90,6 +100,30 @@ public class GraphTraverser {
         System.out.println("Tamarin finished.");
 
         return interpretResult(results.get(node));
+    }
+
+    private String buildCommand(Node node) {
+        String dKeywords = getDKeyword(node);
+        String command = "";
+
+        if (!tamarinBin.isEmpty()){
+            command += tamarinBin + " ";
+        }
+        else {
+            command += "tamarin-prover ";
+        }
+        
+        command += protocol + " ";
+
+        if (!oracleFile.isEmpty()) {
+            command += "--heuristic=o --oraclename=" + oracleFile + " ";
+        }
+        
+        
+        command += "--stop-on-trace=SEQDFS "; // add a true (sequential) depth-first search (DFS) option
+        command += "--prove ";
+        command += dKeywords;
+        return command;
     }
 
     private boolean interpretResult(ArrayList<String> result) {
