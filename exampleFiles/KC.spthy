@@ -1,0 +1,340 @@
+//run: tamarin-prover --heuristic=o --oraclename=oracle.py --stop-on-trace=SEQDFS --prove
+
+//==============================================================================
+//summary of summaries:
+//
+//analyzed: KC.spthy
+//
+//  chatty (all-traces): verified (52 steps)
+//  readA (all-traces): verified (33 steps)
+//  lookA (all-traces): verified (36 steps)
+//  sendcashNoAtt (exists-trace): verified (8 steps)
+//  cashforvoucherKC (all-traces): verified (1917 steps)
+//  cashforcontainerKC (all-traces): verified (984 steps)
+//  cashforcontainerCustKC (all-traces): verified (239 steps)
+//  cashforpurchaseKC (all-traces): verified (1414 steps)
+//  cashforpurchaseCustKC (all-traces): verified (112 steps)
+//  cashforcontainerKCattack (all-traces): falsified - found trace (23 steps)
+//  cashforpurchaseCustKCattack (all-traces): falsified - found trace (26 steps)
+//  cashforpurchaseKCattack (all-traces): falsified - found trace (26 steps)
+//  cashforcontainerCustKCattack (all-traces): falsified - found trace (25 steps)
+//  cashforvoucherKCattack (all-traces): falsified - found trace (23 steps)
+//
+//==============================================================================
+//tamarin-prover --heuristic=o --oraclename=oracle.py --stop-on-trace=SEQDFS    486.35s user 319.65s system 610% cpu 2:12.08 total
+
+theory KC 
+
+begin
+
+functions: receipt/1, 
+object/1,
+look/1,
+get/1
+
+equations: get(object(a))=a,
+           look(receipt(a))=a
+
+//RULES FOR VENDING MACHINE 
+rule 1Purchase:
+    [Fr(~cont_i),Fr(~barcode_i)]
+    --[Type($Cu, 'customer'),
+       Purchase($S,$Cu,~cont_i)]->
+    [ !Container(~barcode_i,~cont_i),
+      Out_O($S,$Cu,object(~cont_i))
+    ]
+
+rule 3Output:
+    [!Container(~barcode_i,cont_i),
+    In_O($Cu, $V, object(cont_i))]
+    --[SendBarcode(~barcode_i),GetCont($V,$Cu,cont_i),Type($Cu,
+    'customer'),Type($V, 'vending')]->
+    [Out_O($V, $Cu, receipt(~barcode_i))]
+
+
+rule 5Cash:
+    [!Container(barcode_i, cont_i), In_O($Cu,$Ca, receipt(barcode_i))]
+    --[Cash($Ca, $Cu, cont_i, barcode_i),
+    Type($Cu, 'customer'),Type($Ca, 'cashier')]->
+    []
+
+
+//RULES FOR THE CUSTOMER
+rule 2Return:
+    [In_O($S,$Cu,object(cont_i))]
+    --[Type($Cu, 'customer'), Type($V, 'vending')]->
+    [Out_O($Cu,$V,object(cont_i))]
+
+rule 4Hand:
+    [In_O($V,$Cu,receipt(barcode_i))]
+    --[Type($Ca, 'cashier'),Type($Cu, 'customer'), Type($V,
+    'vending')]->
+    [Out_O($Cu,$Ca,receipt(barcode_i))]
+
+
+
+//RULES FOR CHANNELS
+rule ChanOut_I:
+   [ Out_I($A, $B, x) ]
+  --[ ChanOut_I($A, $B, x), Neq($A,$B)]->
+   [ !Sec_I($A, $B, x) ]
+
+rule ChanIn_I:
+   [ !Sec_I($A, $B, x) ]
+  --[ ChanIn_I($A, $B, x), Neq($A,$B)]->
+   [ In_I($A, $B, x)]
+
+rule ChanIn_O:
+   [ Pos($A, $B, x) ]
+  --[ ChanIn_O($A, $B, x), Neq($A,$B)]->
+   [ In_O($A, $B, x) ]
+
+rule ChanOut_OO:
+    let x=object(y)
+    in
+   [ Out_O($A, $B, x) ]
+  --[ ChanIn_O($A, $B, x), Neq($A,$B)]->
+   [ Pos($A, $B, x) , Look($B,y)]
+
+rule ChanOut_OP:
+    let x=receipt(y)
+    in
+   [ Out_O($A, $B, x) ]
+  --[ ChanIn_O($A, $B, x), Neq($A,$B), NoType($B,'vending')]->
+   [ Pos($A, $B, x) , Read($B,y)]
+
+//RULES FOR HUMAN KNOWLEDGE
+rule Receive_HK:
+    [ GotInfo($H, x) ]
+  	--[Once($H,x)]-> 
+    [ !HK($H, x) ]
+
+rule Look:
+    [Look($A, x)]
+    --[Human($A)]->
+    [GotInfo($A,x)]
+
+rule Read:
+    [Read($A, x)]
+    --[Human($A)]->
+    [GotInfo($A,x)]
+
+//Chatty
+rule Chatty [color=#FF0000]:
+   [ !HK($H,  x)]
+  --[ Chatty($H,  x)]->
+   [ Out(x) ]
+
+
+//Cocky give/hand 
+rule Cocky [color=#FF0000]:
+    [ Pos($A,$B, x) ]
+  --[  Cocky($B,x), Neq($A,$B), Neq($A,$C), Neq($B,$C), Human($B), Human($C),Once(x,x)]->
+   [ In_OA($B,$C,x) ]
+
+
+//Cocky get 
+rule CockyGet:
+    [ Out_OA($A, $B, x) ]
+  --[ Neq($A,$B), Human($A)]->
+   [ Out_O($A,$B, x) ]
+
+//Forger
+rule Print [color=#FF0000]:
+let y=receipt(x)
+in
+[In(x)]
+--[PrintA(x),Human($Att)]->
+[PosDA($Att,y)]
+
+rule Build [color=#FF0000]:
+let y=object(x)
+in
+[In(x)]
+--[BuildA(x),Human($Att)]->
+[PosDA($Att,y)]
+
+// Rules for dealing with objects and receipts 
+rule GiveA:
+[PosUA($Att,x)]
+--[Human($Att)]->
+[Out_OA($Att,$B,x)]
+
+rule GetA:
+[In_OA($A,$Att,x)]
+--[Human($Att)]->
+[PosDA($Att,x)]
+
+rule LookA:
+let x=object(y)
+in
+[PosDA($Att,x)]
+--[LookA(y),Human($Att) ]->
+[Out(y), PosUA($Att,x)]
+
+rule ReadA:
+let x=receipt(y)
+in
+[PosDA($Att,x)]
+--[ReadA(y),Human($Att)]->
+[Out(y), PosUA($Att,x)]
+
+
+//RESTRICTIONS
+restriction inequality:
+"
+    All x #i. Neq(x,x) @#i ==> F 
+"
+
+restriction type_distinct:
+  "(All x t1 t2 #i #j. (Type(x,t1)@i & Type(x,t2)@j) ==> (t1 = t2))"
+
+  
+restriction once:
+"All x y #i #j. Once(x,y)@i & Once(x,y)@j ==> #i=#j"
+
+restriction human:
+"All x #i. Human(x)@i ==> (Ex #j. Type(x, 'customer')@j & j < i) | 
+(Ex #j. Type(x,'cashier')@j & j < i)"
+
+restriction notype:
+"All x y #i. NoType(x, y)@i ==> not(Ex #j. Type(x,y)@j)"
+
+//LEMMAS 
+lemma chatty[sources]:
+"All h x #i. Chatty(h,x)@i ==>
+(Ex #j. KU(x)@j & j<i) | 
+(Ex s c #j. Purchase(s,c,x)@j & j<i) | 
+(Ex #j. SendBarcode(x)@j & j<i) " 
+
+lemma readA[sources]:
+"All x #i. ReadA(x)@i ==>
+(Ex #j. KU(x)@j & j<i) | 
+(Ex #j. SendBarcode(x)@j & j<i) " 
+
+lemma lookA[sources]:
+"All  x #i. LookA(x)@i ==>
+(Ex #j. KU(x)@j & j<i) | 
+(Ex h c #j. Purchase(h,c,x)@j & j<i) | 
+(Ex #j. SendBarcode(x)@j & j<i) " 
+
+
+//Sanity
+lemma sendcashNoAtt:
+exists-trace "Ex  a b m n #i. Cash(a,b,m,n)@i & 
+not (Ex  x #k. PrintA(x)@k) & 
+not (Ex  x #k. BuildA(x)@k) & 
+not (Ex h x #k. Chatty(h,x)@k) & 
+not (Ex h x #k. Cocky(h,x)@k) 
+"
+
+
+//SECURITY PROPERTIES
+
+//proof takes  ~3 mins
+lemma cashforvoucherKC:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  &
+(not(Ex x #k. PrintA(x)@k) | (
+ not(Ex h x #k. Chatty(h,x)@k) &
+ not(Ex h x #k. Cocky(h,x)@k))) 
+==> 
+ Ex #j . 
+ SendBarcode(bar)@j & j<i  &
+ (not(Ex a2 b2 #i2. Cash(a2,b2,c,bar)@i2 & not(#i=#i2)) |
+ Ex #j2. SendBarcode(bar)@j2 & not(#j=#j2))"
+
+lemma cashforcontainerKC:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i & 
+(not(Ex x #k. PrintA(x)@k) | (
+ not(Ex h x #k. Chatty(h,x)@k) &
+ not(Ex h x #k. Cocky(h,x)@k))) 
+==>
+ Ex v cu1 #j . 
+ GetCont(v,cu1,c)@j & j<i  &
+ (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
+ Ex v1 cu3 #j2. GetCont(v1,cu3,c)@j2 & not(#j=#j2))"
+
+
+lemma cashforcontainerCustKC:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  &
+((not (Ex h x #k. Chatty(h,x)@k)  &  
+not (Ex h x #k. Cocky(h,x)@k)) | 
+(not (Ex  x #k. PrintA(x)@k)  &
+not (Ex h x #k. Cocky(h,x)@k)) ) 
+==>
+ Ex #j v. 
+ GetCont(v,cu,c)@j & j<i  &
+ (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
+ Ex v1 #j2. GetCont(v1,cu,c)@j2 & not(#j=#j2))"
+
+
+lemma cashforpurchaseKC:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i &
+((not (Ex  x #k. PrintA(x)@k) &
+not (Ex  x #k. BuildA(x)@k) ) |
+(not (Ex h x #k. Chatty(h,x)@k) &
+not (Ex h x #k. Cocky(h,x)@k) ) )
+==>
+ Ex s cu1 #j . 
+ Purchase(s,cu1,c)@j & j<i  &
+ (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
+ Ex s1 cu3 #j2. Purchase(s1,cu3,c)@j2 & not(#j=#j2))"
+
+lemma cashforpurchaseCustKC:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i &
+((not (Ex  x #k. PrintA(x)@k) &
+not (Ex h x #k. Cocky(h,x)@k) &
+not (Ex  x #k. BuildA(x)@k) ) |
+(not (Ex h x #k. Chatty(h,x)@k) &
+not (Ex h x #k. Cocky(h,x)@k) ) )
+==>
+ Ex s #j . 
+ Purchase(s,cu,c)@j & j<i  &
+ (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
+ Ex s1 #j2. Purchase(s1,cu,c)@j2 & not(#j=#j2))"
+
+//Below are the attack traces for the properties failing against the strongest
+//threat model combination
+lemma cashforcontainerKCattack:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  
+==>
+ Ex v  cu1  #j . 
+ GetCont(v,cu1,c)@j & j<i  &
+ (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
+ Ex v1 cu3 #j2. GetCont(v1,cu3,c)@j2 & not(#j=#j2))"
+
+lemma cashforpurchaseCustKCattack:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
+==>
+ Ex s #j . 
+ Purchase(s,cu,c)@j & j<i  &
+ (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
+ Ex s1 #j2. Purchase(s1,cu,c)@j2 & not(#j=#j2))"
+
+lemma cashforpurchaseKCattack:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
+==>
+ Ex s cu1 #j . 
+ Purchase(s,cu1,c)@j & j<i  &
+ (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
+ Ex s1 cu3 #j2. Purchase(s1,cu3,c)@j2 & not(#j=#j2))"
+
+lemma cashforcontainerCustKCattack:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  
+==>
+ Ex #j v. 
+ GetCont(v,cu,c)@j & j<i  &
+ (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
+ Ex v1 #j2. GetCont(v1,cu,c)@j2 & not(#j=#j2))"
+
+lemma cashforvoucherKCattack:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
+==> 
+ Ex #j . 
+ SendBarcode(bar)@j & j<i  &
+ (not(Ex a2 b2 #i2. Cash(a2,b2,c,bar)@i2 & not(#i=#i2)) |
+ Ex #j2. SendBarcode(bar)@j2 & not(#j=#j2))"
+
+end
+
+
