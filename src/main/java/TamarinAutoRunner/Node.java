@@ -3,19 +3,17 @@ package TamarinAutoRunner;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Node implements Comparable {
-    private Set<String> threats = new HashSet<>(); // Threats (represented as strings) present in this node.
-    private int noThreats = 0; // Number of individual threats in this node.
-    private int level;
-    private HashSet<Node> parents = new HashSet<>();
-    private HashSet<Node> children = new HashSet<>();
+public class Node implements Comparable<Node> {
+    private final Set<String> threats = new HashSet<>(); // Threats (represented as strings) present in this node.
+    private final int noThreats; // Number of individual threats in this node.
+    private final int level;
+    private final HashSet<Node> parents = new HashSet<>();
+    private final HashSet<Node> children = new HashSet<>();
 
     public Node(Set<String> threatCombination, int totalNumberOfThreats) {
         noThreats = threatCombination.size();
         level = totalNumberOfThreats - noThreats;
-        for (String threat : threatCombination) {
-            threats.add(threat);
-        }
+        threats.addAll(threatCombination);
     }
 
     public Set<String> getThreats () {
@@ -27,9 +25,8 @@ public class Node implements Comparable {
     }
 
     public boolean isChildOf(Node node) {
-        var parentThreats = node.threats;
         for (String threat : threats) {
-            if (!parentThreats.contains(threat)) {
+            if (!node.threats.contains(threat)) {
                 return false;
             }
         }
@@ -38,12 +35,11 @@ public class Node implements Comparable {
 
     @Override
     public String toString() {
-        return ("Node(" +   threats + ", noThreats: " + noThreats + ", degree: " + getDegree() + ", DifferenceInOutDegree: " + DifferenceInOutDegree() + ")");
+        return ("Node(" +   threats + ", noThreats: " + noThreats + ", degree: " + getDegree() + ", DifferenceInOutDegree: " + differenceInOutDegree() + ")");
     }
 
     @Override
-    public int compareTo(Object o) {
-        Node node = (Node) o;
+    public int compareTo(Node node) {
         if (noThreats < node.noThreats) {
             return -1;
         } else if (noThreats == node.noThreats) {
@@ -76,15 +72,11 @@ public class Node implements Comparable {
         return children;
     }
 
-    public int getNumberOfThreats(){
-        return noThreats;
-    }
-
     public int getDegree(){
         return parents.size() + children.size();
     }
     
-    public int DifferenceInOutDegree(){
+    public int differenceInOutDegree(){
         return Math.abs(parents.size() - children.size());
     }
 }

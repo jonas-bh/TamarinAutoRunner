@@ -5,15 +5,12 @@ import java.util.HashSet;
 import com.google.common.collect.Sets;
 
 public class CombinationGraph {
-    private ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
-    private int totalNumberOfThreats;
+    private final ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
+    private final int totalNumberOfThreats;
     private int noNodes = 0;
 
     public CombinationGraph(ArrayList<String> threats) {
-        HashSet<String> set = new HashSet<>();
-        for (var item : threats) {
-            set.add(item);
-        }
+        HashSet<String> set = new HashSet<>(threats);
         totalNumberOfThreats = set.size();
 
         var powerSet = Sets.powerSet(set);
@@ -36,11 +33,11 @@ public class CombinationGraph {
 
     @Override
     public String toString(){
-        var res = "";
+        StringBuilder res = new StringBuilder();
         for (var node : nodes) {
-            res += node.toString();
+            res.append(node.toString());
         }
-        return res;
+        return res.toString();
     }
 
     public void addEdges() {
@@ -50,7 +47,6 @@ public class CombinationGraph {
                     break;
                 }
                 for (Node node2 : nodes.get(node.getLevel() + 1)) {
-
                     if (node2.isChildOf(node)) {
                         node.addChild(node2);
                         node2.addParent(node);
@@ -97,18 +93,6 @@ public class CombinationGraph {
         //TODO write log information
     }
 
-    public int noOfLevels(){
-        return nodes.size();
-    }
-
-    public Node getNode(int level, int index){
-        return nodes.get(level).get(index);
-    }
-
-    public int getTotalNumberOfThreats(){
-        return totalNumberOfThreats;
-    }
-
     public Node getNextNode(){
         Node selectedNode = null;
         for (var level : nodes) {
@@ -121,7 +105,7 @@ public class CombinationGraph {
                 if (node.getDegree() > selectedNode.getDegree()){
                     selectedNode = node;
                 }
-                if (node.getDegree() == selectedNode.getDegree() && node.DifferenceInOutDegree() < selectedNode.DifferenceInOutDegree()){
+                if (node.getDegree() == selectedNode.getDegree() && node.differenceInOutDegree() < selectedNode.differenceInOutDegree()){
                     selectedNode = node;
                 }
             }
@@ -129,7 +113,7 @@ public class CombinationGraph {
         return selectedNode;
     }
 
-    public int GetNumberOfNodes(){
+    public int getNumberOfNodes(){
         return noNodes;
     }
 }

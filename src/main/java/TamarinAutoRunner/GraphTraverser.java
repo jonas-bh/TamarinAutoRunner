@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class GraphTraverser {
 
-    private CombinationGraph graph;
+    private final CombinationGraph graph;
     HashMap<Node, ArrayList<String>> results = new HashMap<>();
 
     String protocol;
@@ -19,42 +19,36 @@ public class GraphTraverser {
 
     public GraphTraverser(CombinationGraph graph, String protocol, String oracleFile, String tamarinBin) {
         this.graph = graph;
-        this.protocol=protocol;
-        this.oracleFile=oracleFile;
-        this.tamarinBin=tamarinBin;
+        this.protocol = protocol;
+        this.oracleFile = oracleFile;
+        this.tamarinBin = tamarinBin;
     }
 
-    private boolean validateNode(Node node) {
-
+    private void validateNode(Node node) {
         boolean result = runTamarinOnNode(node);
-
         if (result) {
             graph.markVerified(node);
-            return true;
         } else {
             graph.markFalsified(node);
-            return false;
         }
     }
 
     private String getDKeyword(Node node) {
-        String keywords = "";
+        StringBuilder keywords = new StringBuilder();
 
         for (String k : node.getThreats()) {
-            keywords += " -D" + k;
+            keywords.append(" -D").append(k);
         }
-        return keywords;
+        return keywords.toString();
     }
 
     public boolean runTamarinOnNode(Node node) {
-
         System.out.println();
         System.out.println("Running Tamarin on " + node.toString() + "...");
 
-        Process process = null;
+        Process process;
 
         try {
-
             // Necessary when running tamarin from a binary file
             // var tamarinPath = "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
             // // var tamarinPath = "tamarin-prover";
@@ -67,33 +61,27 @@ public class GraphTraverser {
             process = Runtime.getRuntime().exec(command, null, currentDir);
 
             process.getErrorStream().close(); // Close ErrorStream because it causes the subprocess to hang during
-                                              // emptying.
+            // emptying.
 
             BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             boolean includeLine = false;
-            String line = "";
+            String line;
             results.put(node, new ArrayList<>());
 
             while ((line = br.readLine()) != null) {
-
                 if (includeLine && line.startsWith("======")) {
                     includeLine = false;
                 }
-
                 if (includeLine) {
                     results.get(node).add(line);
                 }
-
                 if (line.startsWith("======")) {
                     includeLine = true;
                 }
-
                 System.out.println(line);
             }
-
-            System.out.println("Finished running Tamarin on Node: " + node.toString());
-
+            System.out.println("Finished running Tamarin on Node: " + node);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,20 +94,18 @@ public class GraphTraverser {
         String dKeywords = getDKeyword(node);
         String command = "";
 
-        if (!tamarinBin.isEmpty()){
+        if (!tamarinBin.isEmpty()) {
             command += tamarinBin + " ";
-        }
-        else {
+        } else {
             command += "tamarin-prover ";
         }
-        
+
         command += protocol + " ";
 
         if (!oracleFile.isEmpty()) {
             command += "--heuristic=o --oraclename=" + oracleFile + " ";
         }
-        
-        
+
         command += "--stop-on-trace=SEQDFS "; // add a true (sequential) depth-first search (DFS) option
         command += "--prove ";
         command += dKeywords;
@@ -135,7 +121,7 @@ public class GraphTraverser {
     }
 
     public void execute() {
-        while (graph.GetNumberOfNodes() > 0) {
+        while (graph.getNumberOfNodes() > 0) {
             validateNode((graph.getNextNode()));
             // System.out.println(graph);
         }
@@ -147,7 +133,6 @@ public class GraphTraverser {
 
         try {
             FileWriter fw = new FileWriter("results.txt");
-
             for (Node node : results.keySet()) {
                 fw.write(node.toString());
                 for (String s : results.get(node)) {
@@ -155,9 +140,7 @@ public class GraphTraverser {
                     fw.write("\n");
                 }
             }
-
             fw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
