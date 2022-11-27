@@ -16,7 +16,7 @@ public class Node implements Comparable<Node> {
         threats.addAll(threatCombination);
     }
 
-    public Set<String> getThreats () {
+    public Set<String> getThreats() {
         return threats;
     }
 
@@ -35,7 +35,8 @@ public class Node implements Comparable<Node> {
 
     @Override
     public String toString() {
-        return ("Node(" +   threats + ", noThreats: " + noThreats + ", degree: " + getDegree() + ", DifferenceInOutDegree: " + differenceInOutDegree() + ")");
+        return ("Node(" + threats + ", noThreats: " + noThreats + ", degree: " + getDegree()
+                + ", DifferenceInOutDegree: " + differenceAcestorsDescendents() + ")");
     }
 
     @Override
@@ -72,11 +73,37 @@ public class Node implements Comparable<Node> {
         return children;
     }
 
-    public int getDegree(){
+    public int countAncestors() {
+        return getAllAncestors().size();
+    }
+
+    private Set<Node> getAllAncestors() {
+        HashSet<Node> set = new HashSet<>();
+        set.addAll(getParents());
+        for (Node parent : (HashSet<Node>) set.clone()) {
+            set.addAll(parent.getAllAncestors());
+        }
+        return set;
+    }
+
+    public int countDescendents() {
+        return getAllDescendents().size();
+    }
+
+    private Set<Node> getAllDescendents() {
+        HashSet<Node> set = new HashSet<>();
+        set.addAll(getChildren());
+        for (Node parent : (HashSet<Node>) set.clone()) {
+            set.addAll(parent.getAllDescendents());
+        }
+        return set;
+    }
+
+    public int getDegree() {
         return parents.size() + children.size();
     }
-    
-    public int differenceInOutDegree(){
-        return Math.abs(parents.size() - children.size());
+
+    public int differenceAcestorsDescendents() {
+        return Math.abs(countDescendents() - countAncestors());
     }
 }

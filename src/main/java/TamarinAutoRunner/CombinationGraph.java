@@ -32,7 +32,7 @@ public class CombinationGraph {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder res = new StringBuilder();
         for (var node : nodes) {
             res.append(node.toString());
@@ -57,7 +57,8 @@ public class CombinationGraph {
     }
 
     private void removeNode(Node node) {
-        // System.out.println("Removing node: " + node + " positioned at level " + node.getLevel());
+        // System.out.println("Removing node: " + node + " positioned at level " +
+        // node.getLevel());
         for (var parent : node.getParents()) {
             parent.removeChild(node);
         }
@@ -66,46 +67,49 @@ public class CombinationGraph {
         }
         nodes.get(node.getLevel()).remove(node);
         // if (nodes.get(node.getLevel()).size() == 0){
-        //     nodes.remove(node.getLevel());
+        // nodes.remove(node.getLevel());
         // }
         noNodes--;
     }
 
-    public void markFalsified(Node node){
+    public void markFalsified(Node node) {
         // System.out.println(node);
-        ArrayList<Node> parents = new ArrayList<>(node.getParents()); // create copy of parents list to avoid ConcurrentModificationException
+        ArrayList<Node> parents = new ArrayList<>(node.getParents()); // create copy of parents list to avoid
+                                                                      // ConcurrentModificationException
         for (var parent : parents) {
             markFalsified(parent);
         }
         removeNode(node);
 
-        //TODO write log information
+        // TODO write log information
     }
-    
-    public void markVerified(Node node){
+
+    public void markVerified(Node node) {
         // System.out.println(node);
-        ArrayList<Node> children = new ArrayList<>(node.getChildren()); // create copy of parents list to avoid ConcurrentModificationException
+        ArrayList<Node> children = new ArrayList<>(node.getChildren()); // create copy of parents list to avoid
+                                                                        // ConcurrentModificationException
         for (var child : children) {
             markVerified(child);
         }
         removeNode(node);
 
-        //TODO write log information
+        // TODO write log information
     }
 
-    public Node getNextNode(){
+    public Node getNextNode() {
         Node selectedNode = null;
         for (var level : nodes) {
             for (Node node : level) {
-                if (selectedNode == null){
+                if (selectedNode == null) {
                     selectedNode = node;
                     continue;
                 }
-                
-                if (node.getDegree() > selectedNode.getDegree()){
+
+                if (node.getDegree() > selectedNode.getDegree()) {
                     selectedNode = node;
                 }
-                if (node.getDegree() == selectedNode.getDegree() && node.differenceInOutDegree() < selectedNode.differenceInOutDegree()){
+                if (node.getDegree() == selectedNode.getDegree()
+                        && node.differenceAcestorsDescendents() < selectedNode.differenceAcestorsDescendents()) {
                     selectedNode = node;
                 }
             }
@@ -113,7 +117,7 @@ public class CombinationGraph {
         return selectedNode;
     }
 
-    public int getNumberOfNodes(){
+    public int getNumberOfNodes() {
         return noNodes;
     }
 }
