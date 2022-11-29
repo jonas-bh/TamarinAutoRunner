@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/Users/finn/.pyenv/versions/2.7.18/bin/python2
 # coding: latin-1
 
 import re 

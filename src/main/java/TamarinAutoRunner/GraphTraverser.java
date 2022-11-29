@@ -6,12 +6,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GraphTraverser {
 
     private final CombinationGraph graph;
     HashMap<Node, ArrayList<String>> results = new HashMap<>();
+    HashMap<String, HashSet<Node>> maxThreatCombinations = new HashMap<>();
 
     String protocol;
     String oracleFile;
@@ -50,10 +54,13 @@ public class GraphTraverser {
 
         try {
             // Necessary when running tamarin from a binary file
-            // var tamarinPath = "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
+            // var tamarinPath =
+            // "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
             // // var tamarinPath = "tamarin-prover";
-            // var spthyFile = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
-            // var oracleFile = "./exampleFiles/oracle.py"; // Relative from the current working directory
+            // var spthyFile =
+            // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
+            // var oracleFile = "./exampleFiles/oracle.py"; // Relative from the current
+            // working directory
             String command = buildCommand(node);
             System.out.println("Trying to run command: " + command);
             File currentDir = new File(System.getProperty("user.dir"));
@@ -87,7 +94,7 @@ public class GraphTraverser {
         }
         System.out.println("Tamarin finished.");
 
-        return interpretResult(results.get(node));
+        return interpretResult(node);
     }
 
     private String buildCommand(Node node) {
@@ -112,12 +119,46 @@ public class GraphTraverser {
         return command;
     }
 
-    private boolean interpretResult(ArrayList<String> result) {
-        for (String s : result) {
-            if (s.contains("falsified"))
-                return false;
+    private boolean interpretResult(Node node) {
+        ArrayList<String> nodeResult = results.get(node);
+        boolean toReturn = true;
+        for (int i = nodeResult.size() - 2; i >= 0; i--) {
+            String result = nodeResult.get(i);
+
+            if (!result.contains(":")) {
+                break;
+            }
+
+            String propertyName = result.split(" ")[2];
+            String propertyResult = result.split(" ")[4];
+
+            System.out.println("TEST:");
+            Arrays.stream(result.split(" ")).forEach(s -> System.out.println(s));
+            System.out.println("propertyName: " + propertyName);
+            System.out.println("propertyResult: " + propertyResult);
+
+            if (propertyResult.equals("falsified")) {
+                toReturn = false;
+            }
+
+            maxThreatCombinations.putIfAbsent(propertyName, new HashSet<>());
+            if (toReturn) {
+                if (maxThreatCombinations.get(propertyName).isEmpty()) {
+                    maxThreatCombinations.get(propertyName).add(node);
+                } else {
+                    for (Node existingMaxCombination : (HashSet<Node>) maxThreatCombinations.get(propertyName)
+                            .clone()) {
+                        if (node.isGreaterThan(existingMaxCombination) == 0) {
+                            maxThreatCombinations.get(propertyName).add(node);
+                        } else if (node.isGreaterThan(existingMaxCombination) == 1) {
+                            maxThreatCombinations.get(propertyName).remove(existingMaxCombination);
+                            maxThreatCombinations.get(propertyName).add(node);
+                        }
+                    }
+                }
+            }
         }
-        return true;
+        return toReturn;
     }
 
     public void execute() {
@@ -133,6 +174,21 @@ public class GraphTraverser {
 
         try {
             FileWriter fw = new FileWriter("results.txt");
+
+            fw.write("Maximal Threat Combinations\n");
+            fw.write("---------------------\n");
+            for (String s : maxThreatCombinations.keySet()) {
+
+                fw.write(s + ": " + maxThreatCombinations.get(s).toString() + "\n");
+
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter fw = new FileWriter("resultsDEBUGGING.txt");
             for (Node node : results.keySet()) {
                 fw.write(node.toString());
                 for (String s : results.get(node)) {

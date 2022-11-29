@@ -49,6 +49,19 @@ public class Node implements Comparable<Node> {
         return 1;
     }
 
+    public int isGreaterThan(Node that) {
+        int thisNodeThreats = this.threats.size();
+        int thatNodeThreats = that.threats.size();
+
+        if (thisNodeThreats > thatNodeThreats && this.threats.containsAll(that.threats)) {
+            return 1;
+        } else if (thatNodeThreats > thisNodeThreats && that.threats.containsAll(this.threats)) {
+            return -1;
+        }
+        // 0 meaning the nodes are equal or incomparable
+        return 0;
+    }
+
     public void addParent(Node parent) {
         parents.add(parent);
     }
