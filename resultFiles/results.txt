@@ -1,0 +1,14 @@
+Maximal Threat Combinations
+---------------------
+cashforvoucherNetto: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforpurchaseNettoAttack: [Node([COCKY, CHATTY, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0), Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)]
+lookA: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+sendcashNoAtt: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforpurchaseNetto: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforcontainerNetto: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+chatty: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforcontainerCustNetto: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforcontainerCustNettoAttack: [Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)]
+readA: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforpurchaseCustNetto: [Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)]
+cashforpurchaseCustNettoAttack: [Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)]

@@ -5,12 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TamarinFileReader {
     public ArrayList<String> readFile(String path) {
         ArrayList<String> keywords = new ArrayList<String>();
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(path));
         } catch (FileNotFoundException e) {
@@ -25,6 +28,16 @@ public class TamarinFileReader {
                     String keyword = line.split(" ")[1];
                     keywords.add(keyword);
 
+                }
+
+                if (line.startsWith("lemma")) {
+
+                    if (line.contains("[")) {
+                        line = line.substring(line.indexOf(" ") + 1, line.indexOf("["));
+                    } else {
+                        line = line.substring(line.indexOf(" ") + 1, line.indexOf(":"));
+                    }
+                    Main.lemmas.put(line, new HashSet<>());
                 }
 
             }
