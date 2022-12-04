@@ -14,7 +14,7 @@ public class Main {
         // String protocol = args[0];
         // String oracleFile = "";
         // String tamarinBin = "";
-        String protocol = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
+        String protocol = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy";
         String oracleFile = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py";
         String tamarinBin = "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
 
