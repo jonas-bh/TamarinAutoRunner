@@ -51,7 +51,12 @@ public class Main {
             fw.write("Maximal Threat Combinations\n");
             fw.write("---------------------\n");
             for (String s : Main.lemmas.keySet()) {
-                fw.write(s + ": " + Main.lemmas.get(s).toString() + "\n");
+                fw.write(s + ":\n");
+
+                for (Node node : Main.lemmas.get(s)) {
+                    fw.write(node + "\n");
+                }
+                fw.write("\n");
                 fw.flush();
             }
             fw.close();
