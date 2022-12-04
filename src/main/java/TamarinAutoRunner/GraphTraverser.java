@@ -52,14 +52,6 @@ public class GraphTraverser {
         Process process;
 
         try {
-            // Necessary when running tamarin from a binary file
-            // var tamarinPath =
-            // "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
-            // // var tamarinPath = "tamarin-prover";
-            // var spthyFile =
-            // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
-            // var oracleFile = "./exampleFiles/oracle.py"; // Relative from the current
-            // working directory
             String command = buildCommand(node);
             System.out.println("Trying to run command: " + command);
             File currentDir = new File(System.getProperty("user.dir"));
@@ -183,7 +175,10 @@ public class GraphTraverser {
         try {
             FileWriter fw = new FileWriter("./resultFiles/" + lemma + "_resultsDEBUGGING.txt");
             for (Node node : results.keySet()) {
-                fw.write(node.toString());
+
+                fw.write("\n");
+                fw.write(node.toString() + "\n");
+                fw.write("\n");
                 for (String s : results.get(node)) {
                     fw.write(s);
                     fw.write("\n");
