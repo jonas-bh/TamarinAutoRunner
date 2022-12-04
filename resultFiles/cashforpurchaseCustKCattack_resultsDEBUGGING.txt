@@ -1,0 +1,128 @@
+
+Node([CHATTY, FORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (18 steps)
+  readA (all-traces): verified (19 steps)
+  lookA (all-traces): verified (18 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherKC (all-traces): verified (40 steps)
+  cashforcontainerKC (all-traces): verified (24 steps)
+  cashforcontainerCustKC (all-traces): verified (35 steps)
+  cashforpurchaseKC (all-traces): verified (54 steps)
+  cashforpurchaseCustKC (all-traces): verified (28 steps)
+  cashforcontainerKCattack (all-traces): verified (18 steps)
+  cashforpurchaseCustKCattack (all-traces): verified (22 steps)
+  cashforpurchaseKCattack (all-traces): verified (27 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): verified (18 steps)
+
+
+Node([FORGER, OBJECTFORGER], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 13 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (12 steps)
+  readA (all-traces): verified (19 steps)
+  lookA (all-traces): verified (20 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherKC (all-traces): verified (40 steps)
+  cashforcontainerKC (all-traces): verified (24 steps)
+  cashforcontainerCustKC (all-traces): verified (35 steps)
+  cashforpurchaseKC (all-traces): verified (54 steps)
+  cashforpurchaseCustKC (all-traces): verified (28 steps)
+  cashforcontainerKCattack (all-traces): verified (18 steps)
+  cashforpurchaseCustKCattack (all-traces): verified (22 steps)
+  cashforpurchaseKCattack (all-traces): verified (27 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): verified (18 steps)
+
+
+Node([COCKY, FORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 10 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (12 steps)
+  readA (all-traces): verified (33 steps)
+  lookA (all-traces): verified (30 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherKC (all-traces): verified (526 steps)
+  cashforcontainerKC (all-traces): verified (191 steps)
+  cashforcontainerCustKC (all-traces): verified (77 steps)
+  cashforpurchaseKC (all-traces): verified (916 steps)
+  cashforpurchaseCustKC (all-traces): verified (60 steps)
+  cashforcontainerKCattack (all-traces): falsified - found trace (37 steps)
+  cashforpurchaseCustKCattack (all-traces): falsified - found trace (21 steps)
+  cashforpurchaseKCattack (all-traces): falsified - found trace (39 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (27 steps)
+  cashforvoucherKCattack (all-traces): falsified - found trace (37 steps)
+
+
+Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (40 steps)
+  readA (all-traces): verified (27 steps)
+  lookA (all-traces): verified (30 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherKC (all-traces): verified (425 steps)
+  cashforcontainerKC (all-traces): verified (124 steps)
+  cashforcontainerCustKC (all-traces): verified (53 steps)
+  cashforpurchaseKC (all-traces): verified (768 steps)
+  cashforpurchaseCustKC (all-traces): verified (44 steps)
+  cashforcontainerKCattack (all-traces): verified (462 steps)
+  cashforpurchaseCustKCattack (all-traces): falsified - found trace (21 steps)
+  cashforpurchaseKCattack (all-traces): verified (725 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
+  cashforvoucherKCattack (all-traces): verified (462 steps)
+
+
+Node([COCKY, OBJECTFORGER], noThreats: 2, degree: 0, DifferenceInOutDegree: 0)
+
+
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 6 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (18 steps)
+  readA (all-traces): verified (19 steps)
+  lookA (all-traces): verified (20 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherKC (all-traces): verified (40 steps)
+  cashforcontainerKC (all-traces): verified (24 steps)
+  cashforcontainerCustKC (all-traces): verified (35 steps)
+  cashforpurchaseKC (all-traces): verified (54 steps)
+  cashforpurchaseCustKC (all-traces): verified (28 steps)
+  cashforcontainerKCattack (all-traces): verified (18 steps)
+  cashforpurchaseCustKCattack (all-traces): verified (22 steps)
+  cashforpurchaseKCattack (all-traces): verified (27 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): verified (18 steps)
+
