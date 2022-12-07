@@ -1,5 +1,7 @@
 package TamarinAutoRunner;
 
+import com.google.common.base.Stopwatch;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class GraphTraverser {
 
@@ -20,6 +23,8 @@ public class GraphTraverser {
     String protocol;
     String oracleFile;
     String tamarinBin;
+
+    Stopwatch tamarinTimer = new Stopwatch();
 
     public GraphTraverser(CombinationGraph graph, String protocol, String oracleFile, String tamarinBin) {
         this.graph = graph;
@@ -47,6 +52,7 @@ public class GraphTraverser {
     }
 
     public boolean runTamarinOnNode(Node node) {
+        tamarinTimer.start();
         System.out.println();
         System.out.println("Running Tamarin on " + node.toString() + "...");
 
@@ -93,7 +99,7 @@ public class GraphTraverser {
             e.printStackTrace();
         }
         System.out.println("Tamarin finished.");
-
+        tamarinTimer.stop();
         return interpretResult(node);
     }
 
@@ -167,6 +173,7 @@ public class GraphTraverser {
             // System.out.println(graph);
         }
         System.out.println("Program finished.");
+        System.out.println("Total Tamarin time: " + tamarinTimer.elapsedTime(TimeUnit.MILLISECONDS) + " ms");
         writeResultsToFile();
     }
 

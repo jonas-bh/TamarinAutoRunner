@@ -1,14 +1,22 @@
 package TamarinAutoRunner;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
 
 public class Main {
 
     public static void main(String[] args) {
+        var totalTimer = new Stopwatch();
+        totalTimer.start();
         String protocol = args[0];
-        String oracleFile = "";
+        String oracleFile = args[1];
         String tamarinBin = "";
+        if (args.length > 2){
+            tamarinBin = args[2];
+        }
         // String protocol =
         // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
         // String oracleFile =
@@ -45,6 +53,7 @@ public class Main {
 
         GraphTraverser traverser = new GraphTraverser(graph, protocol, oracleFile, tamarinBin);
         traverser.execute();
-
+        totalTimer.stop();
+        System.out.println("Total elapsed time: " + totalTimer.elapsedTime(TimeUnit.MILLISECONDS) + " ms");
     }
 }
