@@ -1,0 +1,57 @@
+Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 0, DifferenceInOutDegree: 0)summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  chatty (all-traces): verified (52 steps)
+  readA (all-traces): verified (33 steps)
+  lookA (all-traces): verified (36 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherNetto (all-traces): verified (4 steps)
+  cashforcontainerNetto (all-traces): verified (4 steps)
+  cashforcontainerCustNetto (all-traces): verified (1131 steps)
+  cashforpurchaseNetto (all-traces): verified (2090 steps)
+  cashforpurchaseCustNetto (all-traces): verified (114 steps)
+  cashforpurchaseCustNettoAttack (all-traces): falsified - found trace (26 steps)
+  cashforpurchaseNettoAttack (all-traces): falsified - found trace (26 steps)
+  cashforcontainerCustNettoAttack (all-traces): falsified - found trace (36 steps)
+
+Node([OBJECTFORGER, RECEIPTFORGER], noThreats: 2, degree: 2, DifferenceInOutDegree: 3)summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (12 steps)
+  readA (all-traces): verified (19 steps)
+  lookA (all-traces): verified (20 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherNetto (all-traces): verified (4 steps)
+  cashforcontainerNetto (all-traces): verified (4 steps)
+  cashforcontainerCustNetto (all-traces): verified (32 steps)
+  cashforpurchaseNetto (all-traces): verified (30 steps)
+  cashforpurchaseCustNetto (all-traces): verified (32 steps)
+  cashforpurchaseCustNettoAttack (all-traces): verified (16 steps)
+  cashforpurchaseNettoAttack (all-traces): verified (15 steps)
+  cashforcontainerCustNettoAttack (all-traces): verified (16 steps)
+
+Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 3)summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 6 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): verified (40 steps)
+  readA (all-traces): verified (27 steps)
+  lookA (all-traces): verified (30 steps)
+  sendcashNoAtt (exists-trace): verified (8 steps)
+  cashforvoucherNetto (all-traces): verified (4 steps)
+  cashforcontainerNetto (all-traces): verified (4 steps)
+  cashforcontainerCustNetto (all-traces): verified (48 steps)
+  cashforpurchaseNetto (all-traces): verified (166 steps)
+  cashforpurchaseCustNetto (all-traces): verified (48 steps)
+  cashforpurchaseCustNettoAttack (all-traces): falsified - found trace (20 steps)
+  cashforpurchaseNettoAttack (all-traces): verified (143 steps)
+  cashforcontainerCustNettoAttack (all-traces): falsified - found trace (20 steps)
+
