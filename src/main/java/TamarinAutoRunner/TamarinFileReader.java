@@ -28,7 +28,7 @@ public class TamarinFileReader {
 
                 }
 
-                if (line.startsWith("lemma") && line.contains("attack")) {
+                if (line.startsWith("lemma") && line.toLowerCase().contains("attack")) {
 
                     if (line.contains("[")) {
                         line = line.substring(line.indexOf(" ") + 1, line.indexOf("["));
