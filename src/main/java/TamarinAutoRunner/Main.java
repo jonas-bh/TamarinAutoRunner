@@ -1,26 +1,56 @@
 package TamarinAutoRunner;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.Sets;
 import java.util.HashMap;
 import java.util.HashSet;
+import org.apache.commons.cli.*;
 
 public class Main {
     public static final HashMap<String, HashSet<Node>> lemmas = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
-        var totalTimer = new Stopwatch();
-        totalTimer.start();
-        String protocol = args[0];
-        String oracleFile = args[1];
+        var totalTimer = new Stopwatch().start();
+        Options options = new Options();
+        Option protocolFileArg = Option.builder("pf")
+                              .longOpt("protocolFile")
+                              .argName("protocolFile")
+                              .desc("The Tamarin Prover protocol file to be analyzed")
+                              .hasArg()
+                              .required(true)
+                              .build();
+        options.addOption(protocolFileArg);
+        Option oracleFileArg = Option.builder("of")
+                            .longOpt("oracleFile")
+                            .argName("oracleFile")
+                            .desc("An oracle file to be used for Tamarin Prover invocations")
+                            .hasArg()
+                            .required(false)
+                            .build();
+        options.addOption(oracleFileArg);
+        Option tamarinBinArg = Option.builder("tam")
+                            .longOpt("tamarinBin")
+                            .argName("tamarinBin")
+                            .hasArg()
+                            .desc("The path to Tamarin Prover bin, if not installed as environment variable")
+                            .required(false)
+                            .build();
+        options.addOption(tamarinBinArg);
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, args);
+        
+        String protocol = cmd.getOptionValue(protocolFileArg);
+        
+        String oracleFile = "";
+        if (cmd.hasOption(oracleFileArg)) {
+            oracleFile = cmd.getOptionValue(oracleFile);
+        }
         String tamarinBin = "";
-        if (args.length > 2){
-            tamarinBin = args[2];
+        if (cmd.hasOption(tamarinBinArg)){
+            tamarinBin = cmd.getOptionValue(tamarinBin);
         }
         // String protocol =
         // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
