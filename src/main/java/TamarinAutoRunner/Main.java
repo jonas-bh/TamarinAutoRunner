@@ -88,6 +88,7 @@ public class Main {
       var tamarinTime = tamarinTimer.elapsedTime(TimeUnit.MILLISECONDS);
       var totalTime = totalTimer.elapsedTime(TimeUnit.MILLISECONDS);
       System.out.println("Total elapsed time: " + totalTime + " ms");
+      System.out.println("Total Tamarin time: " + tamarinTime + " ms");
       System.out.println("Tamarin % of total time: " + tamarinTime / totalTime * 100 + "%");
 
         Logger.writeResultsLogFile();
