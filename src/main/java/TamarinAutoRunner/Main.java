@@ -75,7 +75,7 @@ public class Main {
         // }
 
         Logger.initiateTraversalLog();
-
+        Stopwatch tamarinTimer = new Stopwatch().start();
         for (String lemma : lemmas.keySet()) {
             Logger.writeTraversalLogHeader(lemma);
             CombinationGraph graph = new CombinationGraph(keywords);
@@ -83,8 +83,12 @@ public class Main {
                     lemma);
             traverser.execute();
         }
+        tamarinTimer.stop();
       totalTimer.stop();
-        System.out.println("Total elapsed time: " + totalTimer.elapsedTime(TimeUnit.MILLISECONDS) + " ms");
+      var tamarinTime = tamarinTimer.elapsedTime(TimeUnit.MILLISECONDS);
+      var totalTime = totalTimer.elapsedTime(TimeUnit.MILLISECONDS);
+      System.out.println("Total elapsed time: " + totalTime + " ms");
+      System.out.println("Tamarin % of total time: " + tamarinTime / totalTime * 100 + "%");
 
         Logger.writeResultsLogFile();
     }
