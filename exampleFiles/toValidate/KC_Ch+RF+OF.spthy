@@ -126,7 +126,7 @@ rule Chatty [color=#FF0000]:
   --[ Chatty($H,  x)]->
    [ Out(x) ]
 
-//Forger
+//Receiptforger
 rule Print [color=#FF0000]:
 let y=receipt(x)
 in
@@ -134,6 +134,7 @@ in
 --[PrintA(x),Human($Att)]->
 [PosDA($Att,y)]
 
+//Objectforger
 rule Build [color=#FF0000]:
 let y=object(x)
 in

@@ -135,7 +135,7 @@ rule Cocky [color=#FF0000]:
 //Cocky get 
 rule CockyGet:
     [ Out_OA($A, $B, x) ]
-  --[ Neq($A,$B), Human($A)]->
+  --[ Cocky($A,x), Neq($A,$B), Human($A)]->
    [ Out_O($A,$B, x) ]
 
 //Forger
@@ -235,7 +235,7 @@ not (Ex h x #k. Cocky(h,x)@k)
 lemma cashforvoucherKC:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i  &
 (not(Ex x #k. PrintA(x)@k) | (
- not(Ex h x #k. Chatty(h,x)@k) &
+ //not(Ex h x #k. Chatty(h,x)@k) &
  not(Ex h x #k. Cocky(h,x)@k))) 
 ==> 
  Ex #j . 
