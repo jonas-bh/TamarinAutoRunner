@@ -1,0 +1,20 @@
+Maximal Threat Combinations
+---------------------
+cashforvoucherKCattack:
+Node([COCKY, CHATTY, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+cashforcontainerCustKCattack:
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+cashforcontainerKCattack:
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+Node([COCKY, CHATTY, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+cashforpurchaseCustKCattack:
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+cashforpurchaseKCattack:
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+

@@ -1,1 +1,0 @@
-Node([], noThreats: 0, degree: 0, DifferenceInOutDegree: 0)

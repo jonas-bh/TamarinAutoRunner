@@ -109,7 +109,7 @@ public class CombinationGraph {
                     selectedNode = node;
                 }
                 if (node.getDegree() == selectedNode.getDegree()
-                        && node.differenceAcestorsDescendents() < selectedNode.differenceAcestorsDescendents()) {
+                        && node.differenceAncestorsDescendents() < selectedNode.differenceAncestorsDescendents()) {
                     selectedNode = node;
                 }
             }

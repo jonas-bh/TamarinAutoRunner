@@ -1,0 +1,175 @@
+
+Node([COCKY, OBJECTFORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 13 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (53 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY], noThreats: 1, degree: 0, DifferenceInOutDegree: 0)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 16 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([FORGER, OBJECTFORGER], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 13 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([CHATTY, FORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, FORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 10 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (27 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 6 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+

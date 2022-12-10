@@ -36,7 +36,7 @@ public class Node implements Comparable<Node> {
     @Override
     public String toString() {
         return ("Node(" + threats + ", noThreats: " + noThreats + ", degree: " + getDegree()
-                + ", DifferenceInOutDegree: " + differenceAcestorsDescendents() + ")");
+                + ", DifferenceInOutDegree: " + differenceAncestorsDescendents() + ")");
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Node implements Comparable<Node> {
         return parents.size() + children.size();
     }
 
-    public int differenceAcestorsDescendents() {
+    public int differenceAncestorsDescendents() {
         return Math.abs(countDescendents() - countAncestors());
     }
 }

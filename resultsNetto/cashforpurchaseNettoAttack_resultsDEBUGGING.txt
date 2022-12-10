@@ -1,0 +1,181 @@
+
+Node([COCKY, CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 4, degree: 4, DifferenceInOutDegree: 6)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): falsified - found trace (26 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, CHATTY, OBJECTFORGER], noThreats: 3, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 3 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): falsified - found trace (26 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, OBJECTFORGER], noThreats: 2, degree: 0, DifferenceInOutDegree: 0)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 8 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): falsified - found trace (41 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 5 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): falsified - found trace (41 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 6 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): verified (143 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([OBJECTFORGER, RECEIPTFORGER], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): verified (15 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, CHATTY, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 3 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): verified (143 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+
+
+Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy
+
+  WARNING: 4 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerNetto (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNetto (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustNettoAttack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseNettoAttack (all-traces): verified (15 steps)
+  cashforcontainerCustNettoAttack (all-traces): analysis incomplete (1 steps)
+

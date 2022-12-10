@@ -1,29 +1,27 @@
 //run: tamarin-prover --heuristic=o --oraclename=oracle.py --stop-on-trace=SEQDFS --prove
-
+//
 //==============================================================================
 //summary of summaries:
 //
-//analyzed: KC.spthy
+//analyzed: Netto.spthy
 //
 //  chatty (all-traces): verified (52 steps)
 //  readA (all-traces): verified (33 steps)
 //  lookA (all-traces): verified (36 steps)
-//  sendcashNoAtt (exists-trace): verified (8 steps)
-//  cashforvoucherKC (all-traces): verified (1917 steps)
-//  cashforcontainerKC (all-traces): verified (984 steps)
-//  cashforcontainerCustKC (all-traces): verified (239 steps)
-//  cashforpurchaseKC (all-traces): verified (1414 steps)
-//  cashforpurchaseCustKC (all-traces): verified (112 steps)
-//  cashforcontainerKCattack (all-traces): falsified - found trace (23 steps)
-//  cashforpurchaseCustKCattack (all-traces): falsified - found trace (26 steps)
-//  cashforpurchaseKCattack (all-traces): falsified - found trace (26 steps)
-//  cashforcontainerCustKCattack (all-traces): falsified - found trace (25 steps)
-//  cashforvoucherKCattack (all-traces): falsified - found trace (23 steps)
+//  sendcashNoAtt (exists-trace): verified (9 steps)
+//  cashforvoucherNetto (all-traces): verified (4 steps)
+//  cashforcontainerNetto (all-traces): verified (4 steps)
+//  cashforcontainerCustNetto (all-traces): verified (1071 steps)
+//  cashforpurchaseNetto (all-traces): verified (1878 steps)
+//  cashforpurchaseCustNetto (all-traces): verified (116 steps)
+//  cashforpurchaseCustNettoAttack (all-traces): falsified - found trace (28 steps)
+//  cashforpurchaseNettoAttack (all-traces): falsified - found trace (28 steps)
+//  cashforcontainerCustNettoAttack (all-traces): falsified - found trace (38 steps)
 //
 //==============================================================================
-//tamarin-prover --heuristic=o --oraclename=oracle.py --stop-on-trace=SEQDFS    486.35s user 319.65s system 610% cpu 2:12.08 total
+//tamarin-prover --heuristic=o --oraclename=oracle.py --stop-on-trace=SEQDFS    299.08s user 179.35s system 500% cpu 1:35.64 total
 
-theory KC 
+theory Netto 
 
 begin
 
@@ -37,23 +35,28 @@ equations: get(object(a))=a,
 
 //RULES FOR VENDING MACHINE 
 rule 1Purchase:
-    [Fr(~cont_i),Fr(~barcode_i)]
+    [Fr(~cont_i)]
     --[Type($Cu, 'customer'),
        Purchase($S,$Cu,~cont_i)]->
-    [ !Container(~barcode_i,~cont_i),
+    [ !Container(object(~cont_i)),
       Out_O($S,$Cu,object(~cont_i))
     ]
 
+
 rule 3Output:
-    [!Container(~barcode_i,cont_i),
+    [!Container(object(cont_i)),
+    Fr(~barcode_i),
     In_O($Cu, $V, object(cont_i))]
     --[SendBarcode(~barcode_i),GetCont($V,$Cu,cont_i),Type($Cu,
     'customer'),Type($V, 'vending')]->
-    [Out_O($V, $Cu, receipt(~barcode_i))]
+    [Out_O($V, $Cu, receipt(~barcode_i)),
+    Info(~barcode_i,cont_i)]
 
 
+
+//RULES FOR THE CASHIER
 rule 5Cash:
-    [!Container(barcode_i, cont_i), In_O($Cu,$Ca, receipt(barcode_i))]
+    [In_O($Cu,$Ca, receipt(barcode_i)), Info(barcode_i,cont_i)]
     --[Cash($Ca, $Cu, cont_i, barcode_i),
     Type($Cu, 'customer'),Type($Ca, 'cashier')]->
     []
@@ -119,22 +122,17 @@ rule Read:
     --[Human($A)]->
     [GotInfo($A,x)]
 
-#ifdef CHATTY
 //Chatty
 rule Chatty [color=#FF0000]:
    [ !HK($H,  x)]
   --[ Chatty($H,  x)]->
    [ Out(x) ]
-#endif
 
-#ifdef COCKY
 //Cocky give/hand 
 rule Cocky [color=#FF0000]:
     [ Pos($A,$B, x) ]
   --[  Cocky($B,x), Neq($A,$B), Neq($A,$C), Neq($B,$C), Human($B), Human($C),Once(x,x)]->
    [ In_OA($B,$C,x) ]
-#endif
-
 
 //Cocky get 
 rule CockyGet:
@@ -142,7 +140,6 @@ rule CockyGet:
   --[ Neq($A,$B), Human($A)]->
    [ Out_O($A,$B, x) ]
 
-#ifdef RECEIPTFORGER
 //Forger
 rule Print [color=#FF0000]:
 let y=receipt(x)
@@ -150,16 +147,13 @@ in
 [In(x)]
 --[PrintA(x),Human($Att)]->
 [PosDA($Att,y)]
-#endif
 
-#ifdef OBJECTFORGER
 rule Build [color=#FF0000]:
 let y=object(x)
 in
 [In(x)]
 --[BuildA(x),Human($Att)]->
 [PosDA($Att,y)]
-#endif
 
 // Rules for dealing with objects and receipts 
 rule GiveA:
@@ -186,8 +180,8 @@ in
 --[ReadA(y),Human($Att)]->
 [Out(y), PosUA($Att,x)]
 
-
 //RESTRICTIONS
+
 restriction inequality:
 "
     All x #i. Neq(x,x) @#i ==> F 
@@ -237,32 +231,25 @@ not (Ex h x #k. Cocky(h,x)@k)
 
 
 //SECURITY PROPERTIES
-
-//proof takes  ~3 mins
-lemma cashforvoucherKC:
-"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  &
-(not(Ex x #k. PrintA(x)@k) | (
- not(Ex h x #k. Chatty(h,x)@k) &
- not(Ex h x #k. Cocky(h,x)@k))) 
+lemma cashforvoucherNetto:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
 ==> 
  Ex #j . 
  SendBarcode(bar)@j & j<i  &
  (not(Ex a2 b2 #i2. Cash(a2,b2,c,bar)@i2 & not(#i=#i2)) |
  Ex #j2. SendBarcode(bar)@j2 & not(#j=#j2))"
 
-lemma cashforcontainerKC:
-"All ca cu c bar #i . Cash(ca,cu,c,bar)@i & 
-(not(Ex x #k. PrintA(x)@k) | (
- not(Ex h x #k. Chatty(h,x)@k) &
- not(Ex h x #k. Cocky(h,x)@k))) 
+
+lemma cashforcontainerNetto:
+"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  
 ==>
- Ex v cu1 #j . 
+ Ex v  cu1  #j . 
  GetCont(v,cu1,c)@j & j<i  &
  (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
  Ex v1 cu3 #j2. GetCont(v1,cu3,c)@j2 & not(#j=#j2))"
 
 
-lemma cashforcontainerCustKC:
+lemma cashforcontainerCustNetto:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i  &
 ((not (Ex h x #k. Chatty(h,x)@k)  &  
 not (Ex h x #k. Cocky(h,x)@k)) | 
@@ -275,42 +262,37 @@ not (Ex h x #k. Cocky(h,x)@k)) )
  Ex v1 #j2. GetCont(v1,cu,c)@j2 & not(#j=#j2))"
 
 
-lemma cashforpurchaseKC:
+lemma cashforpurchaseNetto:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i &
-((not (Ex  x #k. PrintA(x)@k) &
-not (Ex  x #k. BuildA(x)@k) ) |
-(not (Ex h x #k. Chatty(h,x)@k) &
+( not (Ex  x #k. BuildA(x)@k) | 
+(not (Ex h x #k. Chatty(h,x)@k)    &
 not (Ex h x #k. Cocky(h,x)@k) ) )
 ==>
- Ex s cu1 #j . 
+ Ex cu1 s #j . 
  Purchase(s,cu1,c)@j & j<i  &
  (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
  Ex s1 cu3 #j2. Purchase(s1,cu3,c)@j2 & not(#j=#j2))"
 
-lemma cashforpurchaseCustKC:
+
+lemma cashforpurchaseCustNetto:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i &
-((not (Ex  x #k. PrintA(x)@k) &
+((not (Ex h x #k. Chatty(h,x)@k)  &  
+not (Ex h x #k. Cocky(h,x)@k) ) |
+(
+not (Ex  x #k. PrintA(x)@k) & 
 not (Ex h x #k. Cocky(h,x)@k) &
-not (Ex  x #k. BuildA(x)@k) ) |
-(not (Ex h x #k. Chatty(h,x)@k) &
-not (Ex h x #k. Cocky(h,x)@k) ) )
+not (Ex  x #k. BuildA(x)@k))) 
 ==>
  Ex s #j . 
  Purchase(s,cu,c)@j & j<i  &
  (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
  Ex s1 #j2. Purchase(s1,cu,c)@j2 & not(#j=#j2))"
+
 
 //Below are the attack traces for the properties failing against the strongest
 //threat model combination
-lemma cashforcontainerKCattack:
-"All ca cu c bar #i . Cash(ca,cu,c,bar)@i  
-==>
- Ex v  cu1  #j . 
- GetCont(v,cu1,c)@j & j<i  &
- (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
- Ex v1 cu3 #j2. GetCont(v1,cu3,c)@j2 & not(#j=#j2))"
 
-lemma cashforpurchaseCustKCattack:
+lemma cashforpurchaseCustNettoAttack:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
 ==>
  Ex s #j . 
@@ -318,7 +300,7 @@ lemma cashforpurchaseCustKCattack:
  (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
  Ex s1 #j2. Purchase(s1,cu,c)@j2 & not(#j=#j2))"
 
-lemma cashforpurchaseKCattack:
+lemma cashforpurchaseNettoAttack:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
 ==>
  Ex s cu1 #j . 
@@ -326,22 +308,13 @@ lemma cashforpurchaseKCattack:
  (not(Ex ca1 cu2  bar2 #i2. Cash(ca1,cu2,c,bar2)@i2 & not(#i=#i2)) |
  Ex s1 cu3 #j2. Purchase(s1,cu3,c)@j2 & not(#j=#j2))"
 
-lemma cashforcontainerCustKCattack:
+lemma cashforcontainerCustNettoAttack:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i  
 ==>
  Ex #j v. 
  GetCont(v,cu,c)@j & j<i  &
  (not(Ex ca1 bar2 #i2. Cash(ca1,cu,c,bar2)@i2 & not(#i=#i2)) |
  Ex v1 #j2. GetCont(v1,cu,c)@j2 & not(#j=#j2))"
-
-lemma cashforvoucherKCattack:
-"All ca cu c bar #i . Cash(ca,cu,c,bar)@i 
-==> 
- Ex #j . 
- SendBarcode(bar)@j & j<i  &
- (not(Ex a2 b2 #i2. Cash(a2,b2,c,bar)@i2 & not(#i=#i2)) |
- Ex #j2. SendBarcode(bar)@j2 & not(#j=#j2))"
-
 end
 
 

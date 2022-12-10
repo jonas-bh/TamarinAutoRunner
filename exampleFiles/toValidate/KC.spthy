@@ -119,30 +119,25 @@ rule Read:
     --[Human($A)]->
     [GotInfo($A,x)]
 
-#ifdef CHATTY
 //Chatty
 rule Chatty [color=#FF0000]:
    [ !HK($H,  x)]
   --[ Chatty($H,  x)]->
    [ Out(x) ]
-#endif
 
-#ifdef COCKY
 //Cocky give/hand 
 rule Cocky [color=#FF0000]:
     [ Pos($A,$B, x) ]
   --[  Cocky($B,x), Neq($A,$B), Neq($A,$C), Neq($B,$C), Human($B), Human($C),Once(x,x)]->
    [ In_OA($B,$C,x) ]
-#endif
 
 
 //Cocky get 
 rule CockyGet:
     [ Out_OA($A, $B, x) ]
-  --[ Neq($A,$B), Human($A)]->
+  --[ Cocky($A,x), Neq($A,$B), Human($A)]->
    [ Out_O($A,$B, x) ]
 
-#ifdef RECEIPTFORGER
 //Forger
 rule Print [color=#FF0000]:
 let y=receipt(x)
@@ -150,16 +145,14 @@ in
 [In(x)]
 --[PrintA(x),Human($Att)]->
 [PosDA($Att,y)]
-#endif
 
-#ifdef OBJECTFORGER
 rule Build [color=#FF0000]:
 let y=object(x)
 in
 [In(x)]
 --[BuildA(x),Human($Att)]->
 [PosDA($Att,y)]
-#endif
+
 
 // Rules for dealing with objects and receipts 
 rule GiveA:
@@ -242,7 +235,7 @@ not (Ex h x #k. Cocky(h,x)@k)
 lemma cashforvoucherKC:
 "All ca cu c bar #i . Cash(ca,cu,c,bar)@i  &
 (not(Ex x #k. PrintA(x)@k) | (
- not(Ex h x #k. Chatty(h,x)@k) &
+ //not(Ex h x #k. Chatty(h,x)@k) &
  not(Ex h x #k. Cocky(h,x)@k))) 
 ==> 
  Ex #j . 
