@@ -46,11 +46,11 @@ public class Main {
         
         String oracleFile = "";
         if (cmd.hasOption(oracleFileArg)) {
-            oracleFile = cmd.getOptionValue(oracleFile);
+            oracleFile = cmd.getOptionValue(oracleFileArg);
         }
         String tamarinBin = "";
         if (cmd.hasOption(tamarinBinArg)){
-            tamarinBin = cmd.getOptionValue(tamarinBin);
+            tamarinBin = cmd.getOptionValue(tamarinBinArg);
         }
         // String protocol =
         // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
