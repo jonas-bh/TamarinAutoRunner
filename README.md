@@ -6,7 +6,7 @@ Repo for our ITU Research Project for automating the testing of different threat
 * Java
 * [Tamarin Prover](https://tamarin-prover.github.io)
 
-## Protocol setup
+## Protocol Setup
 ### Rules
 TamarinAutoRunner requires the rules describing each threat to be annotated in the Tamarin protocol .spthy file using the following notation: 
 
@@ -25,7 +25,7 @@ rule rule2 [color=#FF0000]:
 It is possible to have multiple rules for one threat and these should be enclosed inside the same `#ifdef` and `#endif` pair in that case.
 
 ### Lemmas
-One lemma should be defined per security property the modelled system should maintain. These are subsequently parsed to find the maximal threat combinations for each.
+Lemmas should be defined to describe the security properties of the system. For each lemma, Tamarin Auto Runner will find the maxmimal threat combinations under which the property holds.
 
 ## Usage
 
