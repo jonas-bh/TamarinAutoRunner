@@ -35,7 +35,7 @@ Invoke TamarinAutoRunner from a command prompt using
 
 where
 
-`PROTOCOL_FILE` refers to a Tamarin protocol .spthy file annotated as described in [Protocol Setup](#protocol setup)
+`PROTOCOL_FILE` refers to a Tamarin protocol .spthy file annotated as described in [Protocol Setup](#protocol-setup)
 
 Supported options are:
 
