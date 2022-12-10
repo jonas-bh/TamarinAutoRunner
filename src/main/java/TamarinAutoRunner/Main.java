@@ -3,6 +3,9 @@ package TamarinAutoRunner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import com.google.common.base.Stopwatch;
+import com.google.common.collect.Sets;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -11,12 +14,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // String protocol = args[0];
-        // String oracleFile = "";
-        // String tamarinBin = "";
-        String protocol = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
-        String oracleFile = "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py";
-        String tamarinBin = "/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
+        var totalTimer = new Stopwatch();
+        totalTimer.start();
+        String protocol = args[0];
+        String oracleFile = args[1];
+        String tamarinBin = "";
+        if (args.length > 2){
+            tamarinBin = args[2];
+        }
+        // String protocol =
+        // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
+        // String oracleFile =
+        // "-oracle=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py";
+        // String tamarinBin =
+        // "-tamarin=/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
 
         // java -jar ./build/libs/TamarinAutoRunner-1.0-SNAPSHOT.jar
         // ./exampleFiles/Netto.spthy -oracle=./exampleFiles/oracle.py
@@ -47,9 +58,10 @@ public class Main {
                     lemma);
             traverser.execute();
         }
+      totalTimer.stop();
+        System.out.println("Total elapsed time: " + totalTimer.elapsedTime(TimeUnit.MILLISECONDS) + " ms");
 
         Logger.writeResultsLogFile();
-
     }
 
 }

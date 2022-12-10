@@ -1,5 +1,7 @@
 package TamarinAutoRunner;
 
+import com.google.common.base.Stopwatch;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,6 +10,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class GraphTraverser {
 
@@ -19,6 +23,7 @@ public class GraphTraverser {
     String tamarinBin;
     String lemma;
 
+    Stopwatch tamarinTimer = new Stopwatch();
     public GraphTraverser(CombinationGraph graph, String protocol, String oracleFile, String tamarinBin, String lemma) {
         this.graph = graph;
         this.protocol = protocol;
@@ -47,6 +52,7 @@ public class GraphTraverser {
     }
 
     public boolean runTamarinOnNode(Node node) {
+        tamarinTimer.start();
         System.out.println();
         System.out.println("Running Tamarin on " + node.toString() + "...");
 
@@ -89,7 +95,7 @@ public class GraphTraverser {
             e.printStackTrace();
         }
         System.out.println("Tamarin finished.");
-
+        tamarinTimer.stop();
         return interpretResult(node);
     }
 
@@ -173,7 +179,42 @@ public class GraphTraverser {
             // System.out.println(graph);
         }
         System.out.println("Program finished.");
+
+        System.out.println("Total Tamarin time: " + tamarinTimer.elapsedTime(TimeUnit.MILLISECONDS) + " ms");
         Logger.writeResultsToFile(results, lemma);
+        writeResultsToFile;
+    }
+
+    private void writeResultsToFile() {
+
+        try {
+            FileWriter fw = new FileWriter("results.txt");
+
+            fw.write("Maximal Threat Combinations\n");
+            fw.write("---------------------\n");
+            for (String s : maxThreatCombinations.keySet()) {
+
+                fw.write(s + ": " + maxThreatCombinations.get(s).toString() + "\n");
+
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter fw = new FileWriter("resultsDEBUGGING.txt");
+            for (Node node : results.keySet()) {
+                fw.write(node.toString());
+                for (String s : results.get(node)) {
+                    fw.write(s);
+                    fw.write("\n");
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
