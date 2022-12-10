@@ -173,8 +173,6 @@ public class GraphTraverser {
 
             // System.out.println(graph);
         }
-        System.out.println("Program finished.");
-
         Logger.writeResultsToFile(results, lemma);
     }
 }
