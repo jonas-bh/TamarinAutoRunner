@@ -1,120 +1,5 @@
 
-Node([OBJECTFORGER, RECEIPTFORGER], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DOBJECTFORGER -DRECEIPTFORGER
-
-summary of summaries:
-
-analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
-
-  WARNING: 13 wellformedness check failed!
-           The analysis results might be wrong!
-  
-  chatty (all-traces): analysis incomplete (1 steps)
-  readA (all-traces): analysis incomplete (1 steps)
-  lookA (all-traces): analysis incomplete (1 steps)
-  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
-  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKCattack (all-traces): verified (126 steps)
-  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
-
-
-Node([CHATTY, OBJECTFORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCHATTY -DOBJECTFORGER
-
-summary of summaries:
-
-analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
-
-  WARNING: 12 wellformedness check failed!
-           The analysis results might be wrong!
-  
-  chatty (all-traces): analysis incomplete (1 steps)
-  readA (all-traces): analysis incomplete (1 steps)
-  lookA (all-traces): analysis incomplete (1 steps)
-  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
-  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKCattack (all-traces): verified (72 steps)
-  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
-
-
-Node([CHATTY, RECEIPTFORGER], noThreats: 2, degree: 0, DifferenceInOutDegree: 0)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCHATTY -DRECEIPTFORGER
-
-summary of summaries:
-
-analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
-
-  WARNING: 9 wellformedness check failed!
-           The analysis results might be wrong!
-  
-  chatty (all-traces): analysis incomplete (1 steps)
-  readA (all-traces): analysis incomplete (1 steps)
-  lookA (all-traces): analysis incomplete (1 steps)
-  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
-  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKCattack (all-traces): falsified - found trace (25 steps)
-  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
-
-
-Node([COCKY], noThreats: 1, degree: 0, DifferenceInOutDegree: 0)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCOCKY
-
-summary of summaries:
-
-analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
-
-  WARNING: 16 wellformedness check failed!
-           The analysis results might be wrong!
-  
-  chatty (all-traces): analysis incomplete (1 steps)
-  readA (all-traces): analysis incomplete (1 steps)
-  lookA (all-traces): analysis incomplete (1 steps)
-  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
-  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
-  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
-  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
-  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
-
-
 Node([COCKY, OBJECTFORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCOCKY -DOBJECTFORGER
 
 summary of summaries:
 
@@ -139,16 +24,13 @@ analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/examp
   cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
 
 
-Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 1, DifferenceInOutDegree: 1)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCHATTY -DOBJECTFORGER -DRECEIPTFORGER
+Node([COCKY], noThreats: 1, degree: 0, DifferenceInOutDegree: 0)
 
 summary of summaries:
 
 analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
 
-  WARNING: 6 wellformedness check failed!
+  WARNING: 16 wellformedness check failed!
            The analysis results might be wrong!
   
   chatty (all-traces): analysis incomplete (1 steps)
@@ -163,14 +45,86 @@ analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/examp
   cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
   cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
   cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKCattack (all-traces): falsified - found trace (25 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
   cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
 
 
-Node([COCKY, RECEIPTFORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+Node([FORGER, OBJECTFORGER], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
 
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCOCKY -DRECEIPTFORGER
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 13 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([CHATTY, FORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
+
+summary of summaries:
+
+analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
+
+  WARNING: 9 wellformedness check failed!
+           The analysis results might be wrong!
+  
+  chatty (all-traces): analysis incomplete (1 steps)
+  readA (all-traces): analysis incomplete (1 steps)
+  lookA (all-traces): analysis incomplete (1 steps)
+  sendcashNoAtt (exists-trace): analysis incomplete (1 steps)
+  cashforvoucherKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKC (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKC (all-traces): analysis incomplete (1 steps)
+  cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
+  cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
+  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
+  cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
+
+
+Node([COCKY, FORGER], noThreats: 2, degree: 1, DifferenceInOutDegree: 1)
 
 summary of summaries:
 
@@ -195,16 +149,13 @@ analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/examp
   cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
 
 
-Node([COCKY, CHATTY], noThreats: 2, degree: 2, DifferenceInOutDegree: 2)
-
-Command:
-/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy --heuristic=o --oraclename=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py --stop-on-trace=SEQDFS --prove=cashforcontainerCustKCattack -DCOCKY -DCHATTY
+Node([CHATTY, FORGER, OBJECTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
 
 summary of summaries:
 
 analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/KC.spthy
 
-  WARNING: 9 wellformedness check failed!
+  WARNING: 6 wellformedness check failed!
            The analysis results might be wrong!
   
   chatty (all-traces): analysis incomplete (1 steps)
@@ -219,6 +170,6 @@ analyzed: /Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/examp
   cashforcontainerKCattack (all-traces): analysis incomplete (1 steps)
   cashforpurchaseCustKCattack (all-traces): analysis incomplete (1 steps)
   cashforpurchaseKCattack (all-traces): analysis incomplete (1 steps)
-  cashforcontainerCustKCattack (all-traces): falsified - found trace (20 steps)
+  cashforcontainerCustKCattack (all-traces): verified (20 steps)
   cashforvoucherKCattack (all-traces): analysis incomplete (1 steps)
 

@@ -34,6 +34,7 @@ public class GraphTraverser {
         } else {
             graph.markFalsified(node);
         }
+        Logger.writeTraversalLog(node, result);
     }
 
     private String getDKeyword(Node node) {
@@ -52,7 +53,7 @@ public class GraphTraverser {
         Process process;
 
         try {
-            String command = buildCommand(node);
+            String command = buildCommand(node, lemma);
             System.out.println("Trying to run command: " + command);
             File currentDir = new File(System.getProperty("user.dir"));
             System.out.println(currentDir);
@@ -66,6 +67,10 @@ public class GraphTraverser {
             boolean includeLine = false;
             String line;
             results.put(node, new ArrayList<>());
+
+            results.get(node).add("Command:");
+            results.get(node).add(command);
+            results.get(node).add("");
 
             while ((line = br.readLine()) != null) {
                 if (includeLine && line.startsWith("======")) {
@@ -88,7 +93,7 @@ public class GraphTraverser {
         return interpretResult(node);
     }
 
-    private String buildCommand(Node node) {
+    private String buildCommand(Node node, String lemma) {
         String dKeywords = getDKeyword(node);
         String command = "";
 
@@ -105,7 +110,7 @@ public class GraphTraverser {
         }
 
         command += "--stop-on-trace=SEQDFS "; // add a true (sequential) depth-first search (DFS) option
-        command += "--prove ";
+        command += "--prove=" + lemma;
         command += dKeywords;
         return command;
     }
@@ -164,32 +169,11 @@ public class GraphTraverser {
     public void execute() {
         while (graph.getNumberOfNodes() > 0) {
             validateNode((graph.getNextNode()));
+
             // System.out.println(graph);
         }
         System.out.println("Program finished.");
-        writeResultsToFile();
-    }
-
-    private void writeResultsToFile() {
-
-        try {
-            FileWriter fw = new FileWriter("./resultFiles/" + lemma + "_resultsDEBUGGING.txt");
-            for (Node node : results.keySet()) {
-
-                fw.write("\n");
-                fw.write(node.toString() + "\n");
-                fw.write("\n");
-                for (String s : results.get(node)) {
-                    fw.write(s);
-                    fw.write("\n");
-                    fw.flush();
-                }
-            }
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        Logger.writeResultsToFile(results, lemma);
     }
 
 }
