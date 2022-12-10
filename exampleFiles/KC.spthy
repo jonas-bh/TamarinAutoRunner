@@ -133,14 +133,13 @@ rule Cocky [color=#FF0000]:
     [ Pos($A,$B, x) ]
   --[  Cocky($B,x), Neq($A,$B), Neq($A,$C), Neq($B,$C), Human($B), Human($C),Once(x,x)]->
    [ In_OA($B,$C,x) ]
-#endif
-
 
 //Cocky get 
 rule CockyGet:
     [ Out_OA($A, $B, x) ]
   --[ Neq($A,$B), Human($A)]->
    [ Out_O($A,$B, x) ]
+#endif
 
 #ifdef RECEIPTFORGER
 //Forger
