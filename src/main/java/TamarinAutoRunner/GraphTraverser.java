@@ -102,15 +102,16 @@ public class GraphTraverser {
         String dKeywords = getDKeyword(node);
         String command = "";
 
-        if (!tamarinBin.isEmpty()) {
-            command += tamarinBin + " ";
-        } else {
+        System.out.println("Tamarin bin: " + tamarinBin);
+        if (tamarinBin == null) {
             command += "tamarin-prover ";
+        } else {
+            command += tamarinBin + " ";
         }
 
         command += protocol + " ";
 
-        if (!oracleFile.isEmpty()) {
+        if (oracleFile != null) {
             command += "--heuristic=o --oraclename=" + oracleFile + " ";
         }
 

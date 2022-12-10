@@ -44,14 +44,9 @@ public class Main {
         
         String protocol = cmd.getOptionValue(protocolFileArg);
         
-        String oracleFile = "";
-        if (cmd.hasOption(oracleFileArg)) {
-            oracleFile = cmd.getOptionValue(oracleFileArg);
-        }
-        String tamarinBin = "";
-        if (cmd.hasOption(tamarinBinArg)){
-            tamarinBin = cmd.getOptionValue(tamarinBinArg);
-        }
+        String oracleFile = cmd.getOptionValue(oracleFileArg);
+
+        String tamarinBin = cmd.getOptionValue(tamarinBinArg);
         // String protocol =
         // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
         // String oracleFile =
