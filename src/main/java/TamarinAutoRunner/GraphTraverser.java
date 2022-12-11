@@ -159,6 +159,5 @@ public class GraphTraverser {
         while (graph.getNumberOfNodes() > 0) {
             validateNode((graph.getNextNode()));
         }
-        Logger.writeResultsToFile(results, lemma);
     }
 }
