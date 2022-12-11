@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Node implements Comparable<Node> {
-    private final Set<String> threats = new HashSet<>(); // Threats (represented as strings) present in this node.
-    private final int noThreats; // Number of individual threats in this node.
+    private final Set<String> threats = new HashSet<>(); 
+    private final int noThreats;
     private final int level;
     private final HashSet<Node> parents = new HashSet<>();
     private final HashSet<Node> children = new HashSet<>();
@@ -35,8 +35,7 @@ public class Node implements Comparable<Node> {
 
     @Override
     public String toString() {
-        return ("Node(" + threats + ", noThreats: " + noThreats + ", degree: " + getDegree()
-                + ", DifferenceInOutDegree: " + differenceAncestorsDescendents() + ")");
+        return ("Node(" + threats + ")");
     }
 
     @Override
@@ -58,7 +57,6 @@ public class Node implements Comparable<Node> {
         } else if (thatNodeThreats > thisNodeThreats && that.threats.containsAll(this.threats)) {
             return -1;
         }
-        // 0 meaning the nodes are equal or incomparable
         return 0;
     }
 

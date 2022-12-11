@@ -1,6 +1,5 @@
 package TamarinAutoRunner;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +17,6 @@ public class GraphTraverser {
     String oracleFile;
     String tamarinBin;
     String lemma;
-
 
     public GraphTraverser(CombinationGraph graph, String protocol, String oracleFile, String tamarinBin, String lemma) {
         this.graph = graph;
@@ -61,7 +59,7 @@ public class GraphTraverser {
             process = Runtime.getRuntime().exec(command, null, currentDir);
 
             process.getErrorStream().close(); // Close ErrorStream because it causes the subprocess to hang during
-            // emptying.
+                                              // emptying.
 
             BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
@@ -97,7 +95,6 @@ public class GraphTraverser {
         String dKeywords = getDKeyword(node);
         String command = "";
 
-        System.out.println("Tamarin bin: " + tamarinBin);
         if (tamarinBin == null) {
             command += "tamarin-prover ";
         } else {
@@ -110,7 +107,7 @@ public class GraphTraverser {
             command += "--heuristic=o --oraclename=" + oracleFile + " ";
         }
 
-        command += "--stop-on-trace=SEQDFS "; // add a true (sequential) depth-first search (DFS) option
+        command += "--stop-on-trace=SEQDFS ";
         command += "--prove=" + lemma;
         command += dKeywords;
         return command;
@@ -128,7 +125,6 @@ public class GraphTraverser {
             }
 
             String propertyName = result.split(" ")[2];
-            // String propertyResult = result.split(" ")[4];
             boolean propertyVerified = result.split(" ")[4].equals("falsified") ? false : true;
 
             System.out.println("TEST:");
@@ -144,8 +140,7 @@ public class GraphTraverser {
                     if (Main.lemmas.get(propertyName).isEmpty()) {
                         Main.lemmas.get(propertyName).add(node);
                     } else {
-                        for (Node existingMaxCombination : (HashSet<Node>) Main.lemmas.get(propertyName)
-                                .clone()) {
+                        for (Node existingMaxCombination : (HashSet<Node>) Main.lemmas.get(propertyName).clone()) {
                             if (node.isGreaterThan(existingMaxCombination) == 0) {
                                 Main.lemmas.get(propertyName).add(node);
                             } else if (node.isGreaterThan(existingMaxCombination) == 1) {
@@ -158,20 +153,11 @@ public class GraphTraverser {
             }
         }
         return toReturn;
-
-        // for (String s : nodeResult) {
-        // if (s.contains("falsified"))
-        // return false;
-        // }
-        // return true;
-
     }
 
     public void execute() {
         while (graph.getNumberOfNodes() > 0) {
             validateNode((graph.getNextNode()));
-
-            // System.out.println(graph);
         }
         Logger.writeResultsToFile(results, lemma);
     }

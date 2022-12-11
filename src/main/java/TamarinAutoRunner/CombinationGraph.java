@@ -2,6 +2,7 @@ package TamarinAutoRunner;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import com.google.common.collect.Sets;
 
 public class CombinationGraph {
@@ -25,9 +26,6 @@ public class CombinationGraph {
             list.add(node);
             noNodes++;
         }
-
-        // Print all nodes
-        // System.out.println(this);
         addEdges();
     }
 
@@ -57,8 +55,6 @@ public class CombinationGraph {
     }
 
     private void removeNode(Node node) {
-        // System.out.println("Removing node: " + node + " positioned at level " +
-        // node.getLevel());
         for (var parent : node.getParents()) {
             parent.removeChild(node);
         }
@@ -66,34 +62,23 @@ public class CombinationGraph {
             child.removeParent(node);
         }
         nodes.get(node.getLevel()).remove(node);
-        // if (nodes.get(node.getLevel()).size() == 0){
-        // nodes.remove(node.getLevel());
-        // }
         noNodes--;
     }
 
     public void markFalsified(Node node) {
-        // System.out.println(node);
-        ArrayList<Node> parents = new ArrayList<>(node.getParents()); // create copy of parents list to avoid
-                                                                      // ConcurrentModificationException
+        ArrayList<Node> parents = new ArrayList<>(node.getParents()); 
         for (var parent : parents) {
             markFalsified(parent);
         }
         removeNode(node);
-
-        // TODO write log information
     }
 
     public void markVerified(Node node) {
-        // System.out.println(node);
-        ArrayList<Node> children = new ArrayList<>(node.getChildren()); // create copy of parents list to avoid
-                                                                        // ConcurrentModificationException
+        ArrayList<Node> children = new ArrayList<>(node.getChildren()); 
         for (var child : children) {
             markVerified(child);
         }
         removeNode(node);
-
-        // TODO write log information
     }
 
     public Node getNextNode() {
@@ -104,7 +89,6 @@ public class CombinationGraph {
                     selectedNode = node;
                     continue;
                 }
-
                 if (node.getDegree() > selectedNode.getDegree()) {
                     selectedNode = node;
                 }

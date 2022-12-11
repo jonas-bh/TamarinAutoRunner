@@ -1,11 +1,18 @@
 package TamarinAutoRunner;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import com.google.common.base.Stopwatch;
 import java.util.HashMap;
 import java.util.HashSet;
-import org.apache.commons.cli.*;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
+import com.google.common.base.Stopwatch;
 
 public class Main {
     public static final HashMap<String, HashSet<Node>> lemmas = new HashMap<>();
@@ -43,28 +50,8 @@ public class Main {
         CommandLine cmd = parser.parse(options, args);
 
         String protocol = cmd.getOptionValue(protocolFileArg);
-
         String oracleFile = cmd.getOptionValue(oracleFileArg);
-
         String tamarinBin = cmd.getOptionValue(tamarinBinArg);
-        // String protocol =
-        // "/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/Netto.spthy";
-        // String oracleFile =
-        // "-oracle=/Users/finn/Documents/Research_Project_Tamarin/TamarinAutoRunner/exampleFiles/oracle.py";
-        // String tamarinBin =
-        // "-tamarin=/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover";
-
-        // java -jar ./build/libs/TamarinAutoRunner-1.0-SNAPSHOT.jar
-        // ./exampleFiles/Netto.spthy -oracle=./exampleFiles/oracle.py
-        // -tamarin=/Users/finn/Documents/Research_Project_Tamarin/tamarin-prover/1.6.1/bin/tamarin-prover
-        // for (int i = 1; i < args.length; i++) {
-        // if (args[i].startsWith("-oracle")) {
-        // oracleFile = args[i].split("=")[1];
-        // }
-        // if (args[i].startsWith("-tamarin")) {
-        // tamarinBin = args[i].split("=")[1];
-        // }
-        // }
 
         TamarinFileReader tfr = new TamarinFileReader();
         ArrayList<String> keywords = tfr
