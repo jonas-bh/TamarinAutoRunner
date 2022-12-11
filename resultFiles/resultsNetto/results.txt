@@ -1,12 +1,12 @@
 Maximal Threat Combinations
 ---------------------
 cashforpurchaseNettoAttack:
-Node([COCKY, CHATTY, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
-Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+Node([COCKY, CHATTY, RECEIPTFORGER])
+Node([CHATTY, OBJECTFORGER, RECEIPTFORGER])
 
 cashforcontainerCustNettoAttack:
-Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+Node([CHATTY, OBJECTFORGER, RECEIPTFORGER])
 
 cashforpurchaseCustNettoAttack:
-Node([CHATTY, OBJECTFORGER, RECEIPTFORGER], noThreats: 3, degree: 0, DifferenceInOutDegree: 0)
+Node([CHATTY, OBJECTFORGER, RECEIPTFORGER])
 
