@@ -46,5 +46,5 @@ Supported options are:
 ## Output
 
 Tamarin Auto Runner creates the files results.txt and traversalLog.txt.
-* **results.txt:** List lemmas and the largest threat combinations under which the lemma holds.
+* **results.txt:** A list of lemmas and the largest threat combinations under which the lemma holds.
 * **traversalLog.txt**: A log file listing the tested lemmas and with the order in which nodes of the threat lattice have been analysed.
